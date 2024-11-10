@@ -1,7 +1,10 @@
 #include "canvas.hpp"
 
 Canvas::Canvas(double width, double height)
-    : width(width), height(height), scale(width / 10) {
+    : width(width),
+      height(height),
+      scale(width / 10),
+      center(width / 2, height / 2) {
   x_axis[0] = sf::Vertex(sf::Vector2f(0, height / 2), sf::Color::Black);
   x_axis[1] = sf::Vertex(sf::Vector2f(width, height / 2), sf::Color::Black);
 
@@ -44,3 +47,5 @@ void Canvas::DrawGrid(sf::RenderWindow& window) {
     window.draw(line, 2, sf::Lines);
   }
 }
+
+sf::Vector2f Canvas::GetCenter() const { return center; }

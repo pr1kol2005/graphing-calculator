@@ -8,9 +8,12 @@ class Canvas {
 
   void Draw(sf::RenderWindow& window);
 
+  sf::Vector2f GetCenter() const;
+
  private:
   double width;
   double height;
+  sf::Vector2f center;
 
   sf::Vertex x_axis[2];
   sf::Vertex y_axis[2];
