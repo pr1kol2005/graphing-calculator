@@ -50,7 +50,7 @@ std::unique_ptr<IExpression> ParsePolishNotation(
   throw UnknownSymbolError(std::get<UnknownToken>(token).value);
 }
 
-int CalculatePolishNotation(std::string_view input) {
+std::unique_ptr<IExpression> GetExpressionFromPolishNotation(std::string_view input) {
   std::vector<Token> tokens = Tokenize(input);
   size_t pos = 0;
   auto expression = ParsePolishNotation(tokens, pos);
@@ -59,10 +59,14 @@ int CalculatePolishNotation(std::string_view input) {
     throw WrongExpressionError("Incorrect operands number");
   }
 
-  return expression->Calculate();
+  return expression;
 }
 
-int CalculateUsualNotation(std::string_view input) {
+void OptimizeExpression(std::unique_ptr<IExpression>& expression) {
+  // TODO: implement optimization
+}
+
+std::unique_ptr<IExpression> GetExpressionFromUsualNotation(std::string_view input) {
   // TODO: implement usual notation
   return 0;
 }
@@ -71,12 +75,4 @@ std::unique_ptr<IExpression> ParseUsualNotation(
     const std::vector<Token>& tokens, size_t& pos) {
   // TODO: implement usual notation
   return nullptr;
-}
-
-void OptimizeExpression(std::unique_ptr<IExpression>& expression) {
-  // TODO: implement optimization
-}
-
-void SubstituteVariables(std::unique_ptr<IExpression>& expression) {
-  // TODO: implement substitution
 }
