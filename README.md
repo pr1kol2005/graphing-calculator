@@ -1,2 +1,2 @@
-# graphic-calculator
+#graphing - calculator
 Graphing calculator and plotter.
