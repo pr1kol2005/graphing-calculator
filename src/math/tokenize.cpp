@@ -24,7 +24,8 @@ std::vector<std::string_view> Separation(std::string_view input_str) {
 }
 
 bool IsNumber(std::string_view token) {
-  if (token[0] != '+' and token[0] != '-' and !isdigit(token[0]) and token[0] != '.') {
+  if (token[0] != '+' and token[0] != '-' and !isdigit(token[0]) and
+      token[0] != '.') {
     return false;
   }
   if (token == "+" or token == "-" or token == ".") {

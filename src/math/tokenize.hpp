@@ -33,10 +33,10 @@ struct SinToken {};
 struct CosToken {};
 struct TanToken {};
 
-using Token =
-    std::variant<NumberToken, UnknownToken, PlusToken, MinusToken,
-                 MultiplyToken, DivideToken, MinToken, MaxToken, AbsToken,
-                 ResidualToken, OpeningBracketToken,
-                 ClosingBracketToken, VariableToken, PowerToken, SqrtToken, SinToken, CosToken, TanToken>;
+using Token = std::variant<NumberToken, UnknownToken, PlusToken, MinusToken,
+                           MultiplyToken, DivideToken, MinToken, MaxToken,
+                           AbsToken, ResidualToken, OpeningBracketToken,
+                           ClosingBracketToken, VariableToken, PowerToken,
+                           SqrtToken, SinToken, CosToken, TanToken>;
 
 std::vector<Token> Tokenize(std::string_view str);

@@ -27,9 +27,7 @@ class Variable : public IExpression {
  public:
   Variable() {}
 
-  double Calculate(double x = 0) const override {
-    return x;
-  }
+  double Calculate(double x = 0) const override { return x; }
 };
 
 class IUnaryOperation : public IExpression {
@@ -42,7 +40,9 @@ class IUnaryOperation : public IExpression {
 
   virtual double Operation(double operand) const = 0;
 
-  double Calculate(double x = 0) const override { return Operation(operand_->Calculate(x)); }
+  double Calculate(double x = 0) const override {
+    return Operation(operand_->Calculate(x));
+  }
 };
 
 class IBinaryOperation : public IExpression {
@@ -139,7 +139,9 @@ class Residual : public IBinaryOperation {
   using IBinaryOperation::IBinaryOperation;
 
  protected:
-  double Operation(double lhs, double rhs) const override { return std::fmod(lhs, rhs); }
+  double Operation(double lhs, double rhs) const override {
+    return std::fmod(lhs, rhs);
+  }
 };
 
 class Minimum : public IBinaryOperation {
@@ -147,7 +149,9 @@ class Minimum : public IBinaryOperation {
   using IBinaryOperation::IBinaryOperation;
 
  protected:
-  double Operation(double lhs, double rhs) const override { return std::min(lhs, rhs); }
+  double Operation(double lhs, double rhs) const override {
+    return std::min(lhs, rhs);
+  }
 };
 
 class Maximum : public IBinaryOperation {
@@ -155,7 +159,9 @@ class Maximum : public IBinaryOperation {
   using IBinaryOperation::IBinaryOperation;
 
  protected:
-  double Operation(double lhs, double rhs) const override { return std::max(lhs, rhs); }
+  double Operation(double lhs, double rhs) const override {
+    return std::max(lhs, rhs);
+  }
 };
 
 class Power : public IBinaryOperation {
@@ -163,5 +169,7 @@ class Power : public IBinaryOperation {
   using IBinaryOperation::IBinaryOperation;
 
  protected:
-  double Operation(double lhs, double rhs) const override { return std::pow(lhs, rhs); }
+  double Operation(double lhs, double rhs) const override {
+    return std::pow(lhs, rhs);
+  }
 };
