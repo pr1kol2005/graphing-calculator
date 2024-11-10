@@ -1,3 +1,5 @@
+#pragma once
+
 #include <stdexcept>
 #include <string>
 
@@ -11,11 +13,4 @@ class WrongExpressionError : public std::runtime_error {
  public:
   explicit WrongExpressionError(const std::string& msg = "")
       : std::runtime_error("WrongExpressionError: " + msg) {}
-};
-
-class UnsubstitutedVariablesError : public std::runtime_error {
- public:
-  explicit UnsubstitutedVariablesError()
-      : std::runtime_error(
-            "Forgot to substitute variables before calculating expression") {}
 };
