@@ -71,8 +71,20 @@ Token StrToToken(std::string_view token) {
   if (token == "%") {
     return ResidualToken();
   }
-  if (token == "sqr") {
-    return SqrToken();
+  if (token == "sqrt") {
+    return SqrtToken();
+  }
+  if (token == "pow") {
+    return PowerToken();
+  }
+  if (token == "sin") {
+    return SinToken();
+  }
+  if (token == "cos") {
+    return CosToken();
+  }
+  if (token == "tan") {
+    return TanToken();
   }
   if (token == "(") {
     return OpeningBracketToken();
