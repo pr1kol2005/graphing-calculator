@@ -5,9 +5,9 @@
 #include <vector>
 
 struct NumberToken {
-  int64_t value;
+  double value;
 
-  explicit NumberToken(int64_t valuee) : value(valuee) {}
+  explicit NumberToken(double valuee) : value(valuee) {}
 };
 
 struct UnknownToken {

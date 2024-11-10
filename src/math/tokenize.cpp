@@ -24,20 +24,26 @@ std::vector<std::string_view> Separation(std::string_view input_str) {
 }
 
 bool IsNumber(std::string_view token) {
-  if (token[0] != '+' and token[0] != '-' and !isdigit(token[0])) {
+  if (token[0] != '+' and token[0] != '-' and !isdigit(token[0]) and token[0] != '.') {
     return false;
   }
-  if (token == "+" or token == "-") {
+  if (token == "+" or token == "-" or token == ".") {
     return false;
   }
+  size_t floating_point_count = 0;
   size_t begin = 1;
-  if (isdigit(token[0])) {
-    begin--;
+  if (std::isdigit(token[0])) {
+    --begin;
   }
-  while (begin < token.size() and isdigit(token[begin])) {
-    begin++;
+  while (begin < token.size()) {
+    if (token[begin] == '.') {
+      ++floating_point_count;
+    } else if (!std::isdigit(token[begin])) {
+      return false;
+    }
+    ++begin;
   }
-  return (begin == token.size());
+  return (begin == token.size() and floating_point_count <= 1);
 }
 
 Token StrToToken(std::string_view token) {
@@ -78,8 +84,7 @@ Token StrToToken(std::string_view token) {
     return VariableToken();
   }
   if (IsNumber(token)) {
-    size_t num = 0;
-    return NumberToken(std::stol(token.begin(), &num, 10));
+    return NumberToken(std::stod(token.begin()));
   }
   return UnknownToken(std::string(token));
 }
