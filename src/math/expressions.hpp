@@ -70,12 +70,36 @@ class AbsoluteValue : public IUnaryOperation {
   double Operation(double operand) const override { return std::abs(operand); }
 };
 
-class Square : public IUnaryOperation {
+class SquareRoot : public IUnaryOperation {
  public:
   using IUnaryOperation::IUnaryOperation;
 
  protected:
-  double Operation(double operand) const override { return operand * operand; }
+  double Operation(double operand) const override { return std::sqrt(operand); }
+};
+
+class Sin : public IUnaryOperation {
+ public:
+  using IUnaryOperation::IUnaryOperation;
+
+ protected:
+  double Operation(double operand) const override { return std::sin(operand); }
+};
+
+class Cos : public IUnaryOperation {
+ public:
+  using IUnaryOperation::IUnaryOperation;
+
+ protected:
+  double Operation(double operand) const override { return std::cos(operand); }
+};
+
+class Tan : public IUnaryOperation {
+ public:
+  using IUnaryOperation::IUnaryOperation;
+
+ protected:
+  double Operation(double operand) const override { return std::tan(operand); }
 };
 
 class Sum : public IBinaryOperation {
@@ -132,4 +156,12 @@ class Maximum : public IBinaryOperation {
 
  protected:
   double Operation(double lhs, double rhs) const override { return std::max(lhs, rhs); }
+};
+
+class Power : public IBinaryOperation {
+ public:
+  using IBinaryOperation::IBinaryOperation;
+
+ protected:
+  double Operation(double lhs, double rhs) const override { return std::pow(lhs, rhs); }
 };

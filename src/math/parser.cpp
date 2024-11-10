@@ -13,11 +13,20 @@ std::unique_ptr<IExpression> ParsePolishNotation(
   if (std::holds_alternative<NumberToken>(token)) {
     return std::make_unique<Constant>(std::get<NumberToken>(token).value);
   }
-  if (std::holds_alternative<SqrToken>(token)) {
-    return std::make_unique<Square>(ParsePolishNotation(tokens, pos));
+  if (std::holds_alternative<SqrtToken>(token)) {
+    return std::make_unique<SquareRoot>(ParsePolishNotation(tokens, pos));
   }
   if (std::holds_alternative<AbsToken>(token)) {
     return std::make_unique<AbsoluteValue>(ParsePolishNotation(tokens, pos));
+  }
+  if (std::holds_alternative<SinToken>(token)) {
+    return std::make_unique<Sin>(ParsePolishNotation(tokens, pos));
+  }
+  if (std::holds_alternative<CosToken>(token)) {
+    return std::make_unique<Cos>(ParsePolishNotation(tokens, pos));
+  }
+  if (std::holds_alternative<TanToken>(token)) {
+    return std::make_unique<Tan>(ParsePolishNotation(tokens, pos));
   }
   if (std::holds_alternative<PlusToken>(token)) {
     return std::make_unique<Sum>(ParsePolishNotation(tokens, pos),
@@ -46,6 +55,10 @@ std::unique_ptr<IExpression> ParsePolishNotation(
   if (std::holds_alternative<ResidualToken>(token)) {
     return std::make_unique<Residual>(ParsePolishNotation(tokens, pos),
                                       ParsePolishNotation(tokens, pos));
+  }
+  if (std::holds_alternative<PowerToken>(token)) {
+    return std::make_unique<Power>(ParsePolishNotation(tokens, pos),
+                                   ParsePolishNotation(tokens, pos));
   }
   throw UnknownSymbolError(std::get<UnknownToken>(token).value);
 }
