@@ -1,7 +1,7 @@
 #include "input_field.hpp"
 
-InputField::InputField(double x, double y, double width, double height)
-    : input_text(""), is_focused(false) {
+InputField::InputField(double x, double y, double width, double height, std::string_view text)
+    : input_text(text), is_focused(false) {
   box.setPosition(x, y);
   box.setSize(sf::Vector2f(width, height));
   box.setFillColor(sf::Color::White);
@@ -16,6 +16,7 @@ InputField::InputField(double x, double y, double width, double height)
   shown_text.setFillColor(sf::Color::Black);
   shown_text.setCharacterSize(24);
   shown_text.setPosition(x + 5, y + 5);
+  shown_text.setString(input_text);
 }
 
 void InputField::Draw(sf::RenderWindow& window) {

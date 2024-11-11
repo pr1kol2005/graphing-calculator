@@ -5,7 +5,7 @@
 
 class InputField {
  public:
-  InputField(double x, double y, double width, double height);
+  InputField(double x, double y, double width, double height, std::string_view text = "");
 
   void Draw(sf::RenderWindow& window);
   void HandleEvent(sf::Event event);
