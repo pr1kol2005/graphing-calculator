@@ -1,6 +1,7 @@
 #include "graph_implementation.hpp"
 
-GraphImplementation::GraphImplementation(std::string_view expression, double width_view, double step) {
+GraphImplementation::GraphImplementation(std::string_view expression,
+                                         double width_view, double step) {
   UpdateScale(width_view, step);
   UpdateFormula(expression);
 }
@@ -23,10 +24,6 @@ void GraphImplementation::CalculatePoints() {
   }
 }
 
-std::vector<double> GraphImplementation::GetXCoords() const {
-  return x_coords;
-}
+std::vector<double> GraphImplementation::GetXCoords() const { return x_coords; }
 
-std::vector<double> GraphImplementation::GetYCoords() const {
-  return y_coords;
-}
+std::vector<double> GraphImplementation::GetYCoords() const { return y_coords; }

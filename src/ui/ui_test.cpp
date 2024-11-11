@@ -2,8 +2,8 @@
 
 #include "canvas.hpp"
 #include "constants.hpp"
-#include "input_field.hpp"
 #include "graph_view.hpp"
+#include "input_field.hpp"
 
 int main() {
   sf::RenderWindow window(sf::VideoMode(WINDOW_WIDTH, WINDOW_HEIGHT),
@@ -16,11 +16,12 @@ int main() {
   std::vector<double> yValues;
 
   for (double x = -5; x <= 5; x += 0.01) {
-      xValues.push_back(x);
-      yValues.push_back(sin(1 / x));
+    xValues.push_back(x);
+    yValues.push_back(sin(1 / x));
   }
 
-  GraphView graph(xValues, yValues, canvas.GetCenter(), sf::Color::Red, GRID_SPACING);
+  GraphView graph(xValues, yValues, canvas.GetCenter(), sf::Color::Red,
+                  GRID_SPACING);
 
   while (window.isOpen()) {
     sf::Event event;

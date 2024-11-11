@@ -6,8 +6,8 @@ BridgeController::BridgeController(std::unique_ptr<InputField> input_field,
     : input_field(std::move(input_field)),
       graph(std::move(graph)),
       canvas(std::move(canvas)) {
-    UpdateGraph();    
-  }
+  UpdateGraph();
+}
 
 void BridgeController::HandleEvent(const sf::Event& event) {
   input_field->HandleEvent(event);
@@ -43,7 +43,8 @@ void BridgeController::ProcessInput() {
 
 void BridgeController::UpdateGraph() {
   graph->CalculatePoints();
-  graph_view = std::make_unique<GraphView>(graph->GetXCoords(), graph->GetYCoords(), canvas->GetCenter(),
-                sf::Color::Red, 50);
+  graph_view =
+      std::make_unique<GraphView>(graph->GetXCoords(), graph->GetYCoords(),
+                                  canvas->GetCenter(), sf::Color::Red, 50);
   std::cerr << "Graph updated" << std::endl;
 }

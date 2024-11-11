@@ -5,6 +5,8 @@
 
 class GraphView {
  public:
+  GraphView() = default;
+
   GraphView(const std::vector<double>& x_coords,
             const std::vector<double>& y_coords, sf::Vector2f center,
             sf::Color color = sf::Color::Blue, double scale = 1);

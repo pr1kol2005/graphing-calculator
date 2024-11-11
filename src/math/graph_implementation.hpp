@@ -6,7 +6,8 @@
 
 class GraphImplementation {
  public:
-  GraphImplementation(std::string_view expression, double width_view, double step);
+  GraphImplementation(std::string_view expression, double width_view,
+                      double step);
 
   void UpdateScale(double width_view, double step);
 
