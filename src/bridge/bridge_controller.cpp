@@ -29,10 +29,6 @@ void BridgeController::Draw(sf::RenderWindow& window) {
 void BridgeController::ProcessInput() {
   std::string expression_string = input_field->GetText();
 
-  if (expression_string.empty()) {
-    return;
-  }
-
   try {
     graph->UpdateFormula(expression_string);
     UpdateGraph();
@@ -42,9 +38,13 @@ void BridgeController::ProcessInput() {
 }
 
 void BridgeController::UpdateGraph() {
-  graph->CalculatePoints();
-  graph_view =
+  try {
+    graph->CalculatePoints();
+    graph_view =
       std::make_unique<GraphView>(graph->GetXCoords(), graph->GetYCoords(),
-                                  canvas->GetCenter(), sf::Color::Red, 50);
+                                  canvas->GetCenter(), sf::Color::Red, 80);
+  } catch (const std::exception& error) {
+    std::cerr << "Error while updating graph: " << error.what() << std::endl; 
+  }
   std::cerr << "Graph updated" << std::endl;
 }

@@ -3,7 +3,7 @@
 std::unique_ptr<IExpression> ParsePolishNotation(
     const std::vector<Token>& tokens, size_t& pos) {
   if (pos >= tokens.size()) {
-    throw WrongExpressionError("Incorrect operads number");
+    throw WrongExpressionError("Invalid expression");
   }
   Token token = tokens[pos];
   ++pos;
