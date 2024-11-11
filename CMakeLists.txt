@@ -15,10 +15,12 @@ FetchContent_Declare(SFML
 FetchContent_MakeAvailable(SFML)
 
 add_executable(graph_calc src/main.cpp)
-target_link_libraries(graph_calc sfml-graphics math_lib ui_lib)
+target_link_libraries(graph_calc sfml-graphics math_lib ui_lib bridge_lib)
+target_include_directories(graph_calc PRIVATE src/math src/ui src/bridge)
 
 add_subdirectory(src/math math)
 add_subdirectory(src/ui ui)
+add_subdirectory(src/bridge bridge)
 
 if(WIN32)
   add_custom_command(
