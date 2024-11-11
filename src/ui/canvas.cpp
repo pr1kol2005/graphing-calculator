@@ -49,3 +49,5 @@ void Canvas::DrawGrid(sf::RenderWindow& window) {
 }
 
 sf::Vector2f Canvas::GetCenter() const { return center; }
+
+double Canvas::GetScale() const { return scale; }

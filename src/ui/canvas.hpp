@@ -10,6 +10,8 @@ class Canvas {
 
   sf::Vector2f GetCenter() const;
 
+  double GetScale() const;
+
  private:
   double width;
   double height;
