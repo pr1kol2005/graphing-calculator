@@ -9,8 +9,8 @@ int main() {
   sf::RenderWindow window(sf::VideoMode(WINDOW_WIDTH, WINDOW_HEIGHT),
                           WINDOW_TITLE);
 
-  BridgeController controller(std::make_unique<InputField>(10, 10, 200, 50),
-                             std::make_unique<GraphImplementation>("1", WINDOW_WIDTH, 0.01),
+  BridgeController controller(std::make_unique<InputField>(INPUT_FIELD_X, INPUT_FIELD_Y, INPUT_FIELD_WIDTH, INPUT_FIELD_HEIGHT, GRAPH_DEFAULT_FORMULA),
+                             std::make_unique<GraphImplementation>(GRAPH_DEFAULT_FORMULA, WINDOW_WIDTH, GRAPH_DOTS_STEP),
                              std::make_unique<Canvas>(WINDOW_WIDTH, WINDOW_HEIGHT));
 
   while (window.isOpen()) {
