@@ -1,0 +1,370 @@
+@startuml
+class "sf::Vector2<float>" as C_0011369533705994597869
+class C_0011369533705994597869 {
+__
+}
+class "std::basic_string_view<char>" as C_0005583959530034250771
+class C_0005583959530034250771 {
+__
+}
+class "std::string" as C_0015070288861779828488
+class C_0015070288861779828488 {
+__
+}
+class "std::unique_ptr<IExpression>" as C_0014658766721805681730
+class C_0014658766721805681730 {
+__
+}
+class "std::vector<double>" as C_0004101108369970767411
+class C_0004101108369970767411 {
+__
+}
+class "std::unique_ptr<InputField>" as C_0006172602671236523104
+class C_0006172602671236523104 {
+__
+}
+class "std::unique_ptr<GraphImplementation>" as C_0017517283236001165451
+class C_0017517283236001165451 {
+__
+}
+class "std::unique_ptr<Canvas>" as C_0015342941539595836045
+class C_0015342941539595836045 {
+__
+}
+class "std::unique_ptr<GraphView>" as C_0000966479641069824467
+class C_0000966479641069824467 {
+__
+}
+class "Canvas" as C_0014971548349524840202
+class C_0014971548349524840202 {
++Canvas(double width, double height) : void
+..
++Draw(sf::RenderWindow & window) : void
+-DrawAxes(sf::RenderWindow & window) : void
+-DrawGrid(sf::RenderWindow & window) : void
++GetCenter() const : sf::Vector2f
++GetScale() const : double
+__
+-center : sf::Vector2f
+-height : double
+-scale : double
+-width : double
+-x_axis : sf::Vertex[2]
+-y_axis : sf::Vertex[2]
+}
+class "InputField" as C_0010059840003532263374
+class C_0010059840003532263374 {
++InputField(double x, double y, double width, double height, std::string_view text = "") : void
+..
++Draw(sf::RenderWindow & window) : void
++GetText() const : std::string
++HandleEvent(sf::Event event) : void
+-SetFocused(bool state) : void
+__
+-box : sf::RectangleShape
+-font : sf::Font
+-input_text : std::string
+-is_focused : bool
+-shown_text : sf::Text
+}
+class "UnknownSymbolError" as C_0015820084507609131393
+class C_0015820084507609131393 {
++UnknownSymbolError(const std::string & symbol = "") : void
+__
+}
+class "WrongExpressionError" as C_0000626201140025210898
+class C_0000626201140025210898 {
++WrongExpressionError(const std::string & msg = "") : void
+__
+}
+class "NumberToken" as C_0010376182386861994985
+class C_0010376182386861994985 {
++NumberToken(double valuee) : void
+__
++value : double
+}
+class "UnknownToken" as C_0014237075050008292200
+class C_0014237075050008292200 {
++UnknownToken(std::string value_) : void
+__
++value : std::string
+}
+class "PlusToken" as C_0015486961783918305500
+class C_0015486961783918305500 {
+__
+}
+class "MinusToken" as C_0016217885579057757615
+class C_0016217885579057757615 {
+__
+}
+class "MultiplyToken" as C_0004371315218311210943
+class C_0004371315218311210943 {
+__
+}
+class "DivideToken" as C_0000980545392795749743
+class C_0000980545392795749743 {
+__
+}
+class "MinToken" as C_0000900126371454315848
+class C_0000900126371454315848 {
+__
+}
+class "MaxToken" as C_0001300337970608941314
+class C_0001300337970608941314 {
+__
+}
+class "AbsToken" as C_0005810287322720546343
+class C_0005810287322720546343 {
+__
+}
+class "ResidualToken" as C_0002747152071026548661
+class C_0002747152071026548661 {
+__
+}
+class "OpeningBracketToken" as C_0015539667817488418999
+class C_0015539667817488418999 {
+__
+}
+class "ClosingBracketToken" as C_0011022161020359027620
+class C_0011022161020359027620 {
+__
+}
+class "VariableToken" as C_0007594499529512886508
+class C_0007594499529512886508 {
+__
+}
+class "PowerToken" as C_0013629384983392063059
+class C_0013629384983392063059 {
+__
+}
+class "SqrtToken" as C_0007661669716814474771
+class C_0007661669716814474771 {
+__
+}
+class "SinToken" as C_0013890847064768755819
+class C_0013890847064768755819 {
+__
+}
+class "CosToken" as C_0017602930430692160182
+class C_0017602930430692160182 {
+__
+}
+class "TanToken" as C_0013135945730050843093
+class C_0013135945730050843093 {
+__
+}
+abstract "IExpression" as C_0011145532357001778110
+abstract C_0011145532357001778110 {
++~IExpression() = default : void
+..
+{abstract} +Calculate(double x = 0) const = 0 : double
+__
+}
+class "Constant" as C_0010078073438086618327
+class C_0010078073438086618327 {
++Constant(double value) : void
+..
++Calculate(double x = 0) const : double
+__
+#value_ : double
+}
+class "Variable" as C_0010224091379075340813
+class C_0010224091379075340813 {
++Variable() : void
+..
++Calculate(double x = 0) const : double
+__
+}
+abstract "IUnaryOperation" as C_0003654047602719362147
+abstract C_0003654047602719362147 {
++IUnaryOperation(std::unique_ptr<IExpression> operand) : void
+..
++Calculate(double x = 0) const : double
+{abstract} +Operation(double operand) const = 0 : double
+__
+#operand_ : std::unique_ptr<IExpression>
+}
+abstract "IBinaryOperation" as C_0015477007610714941769
+abstract C_0015477007610714941769 {
++IBinaryOperation(std::unique_ptr<IExpression> lhs, std::unique_ptr<IExpression> rhs) : void
+..
++Calculate(double x = 0) const : double
+{abstract} +Operation(double lhs, double rhs) const = 0 : double
+__
+#lhs_ : std::unique_ptr<IExpression>
+#rhs_ : std::unique_ptr<IExpression>
+}
+class "AbsoluteValue" as C_0002648872377582377791
+class C_0002648872377582377791 {
+#Operation(double operand) const : double
+__
+}
+class "SquareRoot" as C_0000936659452153497111
+class C_0000936659452153497111 {
+#Operation(double operand) const : double
+__
+}
+class "Sin" as C_0007276738852063068385
+class C_0007276738852063068385 {
+#Operation(double operand) const : double
+__
+}
+class "Cos" as C_0003665225839011725998
+class C_0003665225839011725998 {
+#Operation(double operand) const : double
+__
+}
+class "Tan" as C_0010951239326993173265
+class C_0010951239326993173265 {
+#Operation(double operand) const : double
+__
+}
+class "Sum" as C_0002855974134252107382
+class C_0002855974134252107382 {
+#Operation(double lhs, double rhs) const : double
+__
+}
+class "Subtract" as C_0006680420947938474806
+class C_0006680420947938474806 {
+#Operation(double lhs, double rhs) const : double
+__
+}
+class "Multiply" as C_0006209599591027359282
+class C_0006209599591027359282 {
+#Operation(double lhs, double rhs) const : double
+__
+}
+class "Divide" as C_0012357134877200136645
+class C_0012357134877200136645 {
+#Operation(double lhs, double rhs) const : double
+__
+}
+class "Residual" as C_0014408252395982844670
+class C_0014408252395982844670 {
+#Operation(double lhs, double rhs) const : double
+__
+}
+class "Minimum" as C_0015337580313771870959
+class C_0015337580313771870959 {
+#Operation(double lhs, double rhs) const : double
+__
+}
+class "Maximum" as C_0008887037599514575403
+class C_0008887037599514575403 {
+#Operation(double lhs, double rhs) const : double
+__
+}
+class "Power" as C_0005219308653151929648
+class C_0005219308653151929648 {
+#Operation(double lhs, double rhs) const : double
+__
+}
+class "GraphImplementation" as C_0007984576225387246099
+class C_0007984576225387246099 {
++GraphImplementation(std::string_view expression, double width_view, double step) : void
+..
++CalculatePoints() : void
++GetXCoords() const : std::vector<double>
++GetYCoords() const : std::vector<double>
++UpdateFormula(std::string_view expression) : void
++UpdateScale(double width_view, double step) : void
+__
+-formula : std::unique_ptr<IExpression>
+-step : double
+-width_view : double
+-x_coords : std::vector<double>
+-y_coords : std::vector<double>
+}
+class "GraphView" as C_0014771559603893296745
+class C_0014771559603893296745 {
++GraphView() = default : void
++GraphView(const std::vector<double> & x_coords, const std::vector<double> & y_coords, sf::Vector2f center, sf::Color color = = sf::Color::Blue, double scale = 1) : void
+..
++Draw(sf::RenderWindow & window) : void
+__
+-center : sf::Vector2f
+-color : sf::Color
+-scale : double
+-x_coords : std::vector<double>
+-y_coords : std::vector<double>
+}
+class "BridgeController" as C_0016626464198588782218
+class C_0016626464198588782218 {
++BridgeController(std::unique_ptr<InputField> input_field, std::unique_ptr<GraphImplementation> graph, std::unique_ptr<Canvas> canvas) : void
+..
++Draw(sf::RenderWindow & window) : void
++HandleEvent(const sf::Event & event) : void
+-ProcessInput() : void
++UpdateGraph() : void
+__
+-canvas : std::unique_ptr<Canvas>
+-graph : std::unique_ptr<GraphImplementation>
+-graph_view : std::unique_ptr<GraphView>
+-input_field : std::unique_ptr<InputField>
+}
+C_0014658766721805681730 ..> C_0011145532357001778110
+C_0006172602671236523104 ..> C_0010059840003532263374
+C_0017517283236001165451 ..> C_0007984576225387246099
+C_0015342941539595836045 ..> C_0014971548349524840202
+C_0000966479641069824467 ..> C_0014771559603893296745
+C_0014971548349524840202 o-- C_0011369533705994597869 : -center
+C_0010059840003532263374 ..> C_0005583959530034250771
+C_0010059840003532263374 o-- C_0015070288861779828488 : -input_text
+C_0015820084507609131393 ..> C_0015070288861779828488
+C_0000626201140025210898 ..> C_0015070288861779828488
+C_0014237075050008292200 o-- C_0015070288861779828488 : +value
+C_0011145532357001778110 <|-- C_0010078073438086618327
+
+C_0011145532357001778110 <|-- C_0010224091379075340813
+
+C_0003654047602719362147 o-- C_0014658766721805681730 : #operand_
+C_0011145532357001778110 <|-- C_0003654047602719362147
+
+C_0015477007610714941769 o-- C_0014658766721805681730 : #lhs_
+C_0015477007610714941769 o-- C_0014658766721805681730 : #rhs_
+C_0011145532357001778110 <|-- C_0015477007610714941769
+
+C_0003654047602719362147 <|-- C_0002648872377582377791
+
+C_0003654047602719362147 <|-- C_0000936659452153497111
+
+C_0003654047602719362147 <|-- C_0007276738852063068385
+
+C_0003654047602719362147 <|-- C_0003665225839011725998
+
+C_0003654047602719362147 <|-- C_0010951239326993173265
+
+C_0015477007610714941769 <|-- C_0002855974134252107382
+
+C_0015477007610714941769 <|-- C_0006680420947938474806
+
+C_0015477007610714941769 <|-- C_0006209599591027359282
+
+C_0015477007610714941769 <|-- C_0012357134877200136645
+
+C_0015477007610714941769 <|-- C_0014408252395982844670
+
+C_0015477007610714941769 <|-- C_0015337580313771870959
+
+C_0015477007610714941769 <|-- C_0008887037599514575403
+
+C_0015477007610714941769 <|-- C_0005219308653151929648
+
+C_0007984576225387246099 ..> C_0005583959530034250771
+C_0007984576225387246099 o-- C_0014658766721805681730 : -formula
+C_0007984576225387246099 o-- C_0004101108369970767411 : -x_coords
+C_0007984576225387246099 o-- C_0004101108369970767411 : -y_coords
+C_0014771559603893296745 o-- C_0004101108369970767411 : -x_coords
+C_0014771559603893296745 o-- C_0004101108369970767411 : -y_coords
+C_0014771559603893296745 o-- C_0011369533705994597869 : -center
+C_0016626464198588782218 ..> C_0010059840003532263374
+C_0016626464198588782218 ..> C_0007984576225387246099
+C_0016626464198588782218 ..> C_0014971548349524840202
+C_0016626464198588782218 o-- C_0006172602671236523104 : -input_field
+C_0016626464198588782218 o-- C_0017517283236001165451 : -graph
+C_0016626464198588782218 o-- C_0015342941539595836045 : -canvas
+C_0016626464198588782218 o-- C_0000966479641069824467 : -graph_view
+
+'Generated with clang-uml, version 0.5.5
+'LLVM version Homebrew clang version 19.1.2
+@enduml
