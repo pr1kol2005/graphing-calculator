@@ -3,6 +3,7 @@ project(graphing_calculator)
 
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_SOURCE_DIR}/bin)
+set(CMAKE_CXX_STANDARD_INCLUDE_DIRECTORIES ${CMAKE_CXX_IMPLICIT_INCLUDE_DIRECTORIES})
 option(BUILD_SHARED_LIBS "Build shared libraries" OFF)
 
 include(FetchContent)
