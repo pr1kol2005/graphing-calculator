@@ -13,7 +13,6 @@ sudo apt install \
     libgl1-mesa-dev \
     libegl1-mesa-dev
 
-git clone git@gitlab.com:fakepr1kol2005/graphing-calculator.git
 cd graphing-calculator
 
 cmake -B build;
