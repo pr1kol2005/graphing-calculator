@@ -2,6 +2,7 @@
 
 #include <SFML/Graphics.hpp>
 #include <iostream>
+#include <memory>
 
 #include "../math/graph_implementation.hpp"
 #include "../math/parser.hpp"

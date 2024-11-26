@@ -1,5 +1,7 @@
 #pragma once
 
+#include <memory>
+
 #include "errors.hpp"
 #include "expressions.hpp"
 #include "tokenize.hpp"

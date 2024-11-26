@@ -1,5 +1,7 @@
 #include <SFML/Graphics.hpp>
 
+#include <cmath>
+
 #include "canvas.hpp"
 #include "constants.hpp"
 #include "graph_view.hpp"
@@ -17,7 +19,7 @@ int main() {
 
   for (double x = -5; x <= 5; x += 0.01) {
     xValues.push_back(x);
-    yValues.push_back(sin(1 / x));
+    yValues.push_back(std::sin(1 / x));
   }
 
   GraphView graph(xValues, yValues, canvas.GetCenter(), sf::Color::Red,
