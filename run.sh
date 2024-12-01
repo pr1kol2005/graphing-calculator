@@ -1,5 +1,8 @@
-sudo upt install g++
-sudo upt install cmake
+ #!/bin/bash
+
+sudo apt install g++
+sudo apt install cmake
+sudo apt install make
 
 sudo apt update
 sudo apt install \
