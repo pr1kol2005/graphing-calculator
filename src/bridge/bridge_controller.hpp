@@ -25,6 +25,10 @@ class BridgeController {
  private:
   void ProcessInput();
 
+  void AdjustScale(const sf::Event& event);
+
+  void Move(const sf::Event& event);
+
   std::unique_ptr<InputField> input_field;
   std::unique_ptr<GraphImplementation> graph;
   std::unique_ptr<Canvas> canvas;
