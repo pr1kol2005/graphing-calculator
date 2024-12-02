@@ -107,7 +107,7 @@ std::vector<Token> Tokenize(std::string_view str) {
   std::vector<Token> result;
   result.reserve(separated.size());
 
-  for (const auto& substr : separated) {
+  for (const auto &substr : separated) {
     result.emplace_back(StrToToken(substr));
   }
 

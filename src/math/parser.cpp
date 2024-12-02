@@ -1,7 +1,7 @@
 #include "parser.hpp"
 
 std::unique_ptr<IExpression> ParsePolishNotation(
-    const std::vector<Token>& tokens, size_t& pos) {
+    const std::vector<Token> &tokens, size_t &pos) {
   if (pos >= tokens.size()) {
     throw WrongExpressionError("Invalid expression");
   }
@@ -76,7 +76,7 @@ std::unique_ptr<IExpression> GetExpressionFromPolishNotation(
   return expression;
 }
 
-void OptimizeExpression(std::unique_ptr<IExpression>& expression) {
+void OptimizeExpression(std::unique_ptr<IExpression> &expression) {
   // TODO: implement optimization
 }
 
@@ -87,7 +87,7 @@ std::unique_ptr<IExpression> GetExpressionFromUsualNotation(
 }
 
 std::unique_ptr<IExpression> ParseUsualNotation(
-    const std::vector<Token>& tokens, size_t& pos) {
+    const std::vector<Token> &tokens, size_t &pos) {
   // TODO: implement usual notation
   return nullptr;
 }
