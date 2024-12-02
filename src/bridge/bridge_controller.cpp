@@ -10,11 +10,15 @@ BridgeController::BridgeController(std::unique_ptr<InputField> input_field,
 }
 
 void BridgeController::Draw(sf::RenderWindow& window) {
-  canvas->Draw(window);
+  try {
+    canvas->Draw(window);
 
-  input_field->Draw(window);
+    input_field->Draw(window);
 
-  graph_view->Draw(window);
+    graph_view->Draw(window);
+  } catch (const std::exception& e) {
+    std::cerr << "Error while drawing: " << e.what() << std::endl;
+  }
 }
 
 void BridgeController::HandleEvent(const sf::Event& event) {
@@ -31,6 +35,47 @@ void BridgeController::HandleEvent(const sf::Event& event) {
 
   if (event.type == sf::Event::KeyPressed) {
     MoveWithKeyboard(event);
+  }
+
+  if (event.type == sf::Event::MouseButtonPressed) {
+    StartDragging(event);
+  }
+
+  if (event.type == sf::Event::MouseButtonReleased) {
+    StopDragging(event);
+  }
+
+  if (event.type == sf::Event::MouseMoved) {
+    DragMouse(event);
+  }
+
+  // TODO : Reset button
+}
+
+void BridgeController::StartDragging(const sf::Event& event) {
+  if (event.mouseButton.button == sf::Mouse::Left) {
+    is_dragging = true;
+    last_mouse_pos = sf::Mouse::getPosition();
+  }
+}
+
+void BridgeController::StopDragging(const sf::Event& event) {
+  if (event.mouseButton.button == sf::Mouse::Left) {
+    is_dragging = false;
+  }
+}
+
+void BridgeController::DragMouse(const sf::Event& event) {
+  if (is_dragging) {
+    sf::Vector2i current_mouse_pos = sf::Mouse::getPosition();
+    sf::Vector2i delta = current_mouse_pos - last_mouse_pos;
+    last_mouse_pos = current_mouse_pos;
+
+    double x_delta = delta.x;
+    double y_delta = delta.y;
+    graph->Move(x_delta);
+    canvas->Move(x_delta, -y_delta);
+    UpdateGraph();
   }
 }
 
@@ -78,9 +123,9 @@ void BridgeController::ProcessInput() {
 void BridgeController::UpdateGraph() {
   try {
     graph->CalculatePoints();
-    graph_view =
-        std::make_unique<GraphView>(graph->GetXCoords(), graph->GetYCoords(), canvas->GetXOffset(),
-                                    canvas->GetYOffset(), graph->GetScale(), sf::Color::Red);
+    graph_view = std::make_unique<GraphView>(
+        graph->GetXCoords(), graph->GetYCoords(), canvas->GetXOffset(),
+        canvas->GetYOffset(), graph->GetScale(), sf::Color::Red);
   } catch (const std::exception& error) {
     std::cerr << "Error while updating graph: " << error.what() << std::endl;
   }

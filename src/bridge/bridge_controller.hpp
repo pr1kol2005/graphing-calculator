@@ -29,9 +29,17 @@ class BridgeController {
 
   void MoveWithKeyboard(const sf::Event& event);
 
+  void StartDragging(const sf::Event& event);
+
+  void StopDragging(const sf::Event& event);
+
+  void DragMouse(const sf::Event& event);
+
   std::unique_ptr<InputField> input_field;
   std::unique_ptr<GraphImplementation> graph;
   std::unique_ptr<Canvas> canvas;
-
   std::unique_ptr<GraphView> graph_view;
+
+  bool is_dragging;
+  sf::Vector2i last_mouse_pos;
 };
