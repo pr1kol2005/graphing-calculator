@@ -1,5 +1,4 @@
 #include <SFML/Graphics.hpp>
-
 #include <cmath>
 
 #include "canvas.hpp"
@@ -22,8 +21,7 @@ int main() {
     yValues.push_back(std::sin(1 / x));
   }
 
-  GraphView graph(xValues, yValues, canvas.GetCenter(), sf::Color::Red,
-                  GRID_SPACING);
+  GraphView graph(xValues, yValues, 0, 0, GRID_SPACING, sf::Color::Red);
 
   while (window.isOpen()) {
     sf::Event event;
