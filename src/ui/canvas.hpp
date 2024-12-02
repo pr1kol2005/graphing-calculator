@@ -2,15 +2,19 @@
 
 #include <SFML/Graphics.hpp>
 
+#include "constants.hpp"
+
 class Canvas {
  public:
   Canvas(double width, double height);
 
-  void Draw(sf::RenderWindow& window);
+  void Draw(sf::RenderWindow &window);
 
   sf::Vector2f GetCenter() const;
 
   double GetScale() const;
+
+  void AdjustScale(double factor);
 
  private:
   double width;
@@ -19,8 +23,8 @@ class Canvas {
 
   sf::Vertex x_axis[2];
   sf::Vertex y_axis[2];
-  double scale;
+  double grid_step;
 
-  void DrawAxes(sf::RenderWindow& window);
-  void DrawGrid(sf::RenderWindow& window);
+  void DrawAxes(sf::RenderWindow &window);
+  void DrawGrid(sf::RenderWindow &window);
 };
