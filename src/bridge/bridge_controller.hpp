@@ -27,7 +27,7 @@ class BridgeController {
 
   void AdjustScale(const sf::Event& event);
 
-  void Move(const sf::Event& event);
+  void MoveWithKeyboard(const sf::Event& event);
 
   std::unique_ptr<InputField> input_field;
   std::unique_ptr<GraphImplementation> graph;

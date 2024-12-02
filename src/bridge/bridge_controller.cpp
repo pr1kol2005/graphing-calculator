@@ -30,11 +30,11 @@ void BridgeController::HandleEvent(const sf::Event& event) {
   }
 
   if (event.type == sf::Event::KeyPressed) {
-    Move(event);
+    MoveWithKeyboard(event);
   }
 }
 
-void BridgeController::Move(const sf::Event& event) {
+void BridgeController::MoveWithKeyboard(const sf::Event& event) {
   double x_delta = 0;
   double y_delta = 0;
   if (event.key.code == sf::Keyboard::Left) {
@@ -51,7 +51,7 @@ void BridgeController::Move(const sf::Event& event) {
     y_delta = -10;
   }
   graph->Move(x_delta);
-  // TODO : Grid move
+  canvas->Move(x_delta, y_delta);
   UpdateGraph();
 }
 
@@ -79,8 +79,8 @@ void BridgeController::UpdateGraph() {
   try {
     graph->CalculatePoints();
     graph_view =
-        std::make_unique<GraphView>(graph->GetXCoords(), graph->GetYCoords(), 0,
-                                    0, graph->GetScale(), sf::Color::Red);
+        std::make_unique<GraphView>(graph->GetXCoords(), graph->GetYCoords(), canvas->GetXOffset(),
+                                    canvas->GetYOffset(), graph->GetScale(), sf::Color::Red);
   } catch (const std::exception& error) {
     std::cerr << "Error while updating graph: " << error.what() << std::endl;
   }

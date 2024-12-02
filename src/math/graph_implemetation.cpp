@@ -4,8 +4,8 @@
 
 GraphImplementation::GraphImplementation(std::string_view expression,
                                          double left_span, double right_span,
-                                         double points_number, double scale)
-    : scale(scale) {
+                                         double points_number, double grid_step)
+    : grid_step(grid_step) {
   UpdateSpan(left_span, right_span);
   UpdateStep(points_number);
   UpdateFormula(expression);
@@ -25,15 +25,15 @@ void GraphImplementation::AdjustSpan(double factor) {
   step *= factor;
   left_span *= factor;
   right_span *= factor;
-  scale /= factor;
+  grid_step /= factor;
 }
 
 void GraphImplementation::Move(double x_delta) {
-  right_span += x_delta;
-  left_span -= x_delta;
+  right_span -= (x_delta / grid_step);
+  left_span += (x_delta / grid_step);
 }
 
-double GraphImplementation::GetScale() const { return scale; }
+double GraphImplementation::GetScale() const { return grid_step; }
 
 void GraphImplementation::UpdateFormula(std::string_view expression) {
   try {
