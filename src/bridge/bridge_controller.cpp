@@ -114,6 +114,7 @@ void BridgeController::ProcessInput() {
 
   try {
     graph->UpdateFormula(expression_string);
+    std::cerr << "Graph formula updated" << std::endl;
     UpdateGraph();
   } catch (const std::exception& error) {
     std::cerr << "Ошибка при парсинге выражения: " << error.what() << std::endl;
@@ -129,5 +130,4 @@ void BridgeController::UpdateGraph() {
   } catch (const std::exception& error) {
     std::cerr << "Error while updating graph: " << error.what() << std::endl;
   }
-  std::cerr << "Graph updated" << std::endl;
 }
