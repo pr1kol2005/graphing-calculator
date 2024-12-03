@@ -2,6 +2,11 @@
 
 #include <SFML/Graphics.hpp>
 
+#include <string>
+#include <cmath>
+#include <iostream>
+#include <sstream>
+
 #include "constants.hpp"
 
 class Canvas {
@@ -30,10 +35,12 @@ class Canvas {
   sf::Vertex x_axis[2];
   sf::Vertex y_axis[2];
   double grid_step;
+  double scale;
 
   double x_offset;
   double y_offset;
 
   void DrawAxes(sf::RenderWindow &window);
   void DrawGrid(sf::RenderWindow &window);
+  void DrawNumbers(sf::RenderWindow& window);
 };
