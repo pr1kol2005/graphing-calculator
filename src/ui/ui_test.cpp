@@ -8,7 +8,7 @@
 
 int main() {
   sf::RenderWindow window(sf::VideoMode(WINDOW_WIDTH, WINDOW_HEIGHT),
-                          WINDOW_TITLE);
+                          WINDOW_TITLE, sf::Style::Close);
 
   Canvas canvas(WINDOW_WIDTH, WINDOW_HEIGHT);
   InputField input_field(10, 10, 200, 50);
