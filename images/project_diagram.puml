@@ -3,8 +3,8 @@ class "sf::Vector2<float>" as C_0011369533705994597869
 class C_0011369533705994597869 {
 __
 }
-class "std::basic_string_view<char>" as C_0005583959530034250771
-class C_0005583959530034250771 {
+class "sf::Vector2<int>" as C_0002600167325038268945
+class C_0002600167325038268945 {
 __
 }
 class "std::string" as C_0015070288861779828488
@@ -13,6 +13,10 @@ __
 }
 class "std::unique_ptr<IExpression>" as C_0014658766721805681730
 class C_0014658766721805681730 {
+__
+}
+class "std::basic_string_view<char>" as C_0005583959530034250771
+class C_0005583959530034250771 {
 __
 }
 class "std::vector<double>" as C_0004101108369970767411
@@ -34,38 +38,6 @@ __
 class "std::unique_ptr<GraphView>" as C_0000966479641069824467
 class C_0000966479641069824467 {
 __
-}
-class "Canvas" as C_0014971548349524840202
-class C_0014971548349524840202 {
-+Canvas(double width, double height) : void
-..
-+Draw(sf::RenderWindow & window) : void
--DrawAxes(sf::RenderWindow & window) : void
--DrawGrid(sf::RenderWindow & window) : void
-+GetCenter() const : sf::Vector2f
-+GetScale() const : double
-__
--center : sf::Vector2f
--height : double
--scale : double
--width : double
--x_axis : sf::Vertex[2]
--y_axis : sf::Vertex[2]
-}
-class "InputField" as C_0010059840003532263374
-class C_0010059840003532263374 {
-+InputField(double x, double y, double width, double height, std::string_view text = "") : void
-..
-+Draw(sf::RenderWindow & window) : void
-+GetText() const : std::string
-+HandleEvent(sf::Event event) : void
--SetFocused(bool state) : void
-__
--box : sf::RectangleShape
--font : sf::Font
--input_text : std::string
--is_focused : bool
--shown_text : sf::Text
 }
 class "UnknownSymbolError" as C_0015820084507609131393
 class C_0015820084507609131393 {
@@ -261,55 +233,107 @@ __
 }
 class "GraphImplementation" as C_0007984576225387246099
 class C_0007984576225387246099 {
-+GraphImplementation(std::string_view expression, double width_view, double step) : void
++GraphImplementation(std::string_view expression, double left_span, double right_span, double points_number, double grid_step) : void
 ..
++AdjustSpan(double factor) : void
 +CalculatePoints() : void
++GetGridStep() const : double
 +GetXCoords() const : std::vector<double>
 +GetYCoords() const : std::vector<double>
++Move(double x_delta) : void
 +UpdateFormula(std::string_view expression) : void
-+UpdateScale(double width_view, double step) : void
++UpdateSpan(double left_span, double right_span) : void
++UpdateStep(double points_number) : void
 __
 -formula : std::unique_ptr<IExpression>
+-grid_step : double
+-left_span : double
+-right_span : double
 -step : double
--width_view : double
 -x_coords : std::vector<double>
 -y_coords : std::vector<double>
+}
+class "Canvas" as C_0014971548349524840202
+class C_0014971548349524840202 {
++Canvas(double width, double height) : void
+..
++AdjustScale(double factor) : void
++Draw(sf::RenderWindow & window) : void
+-DrawAxes(sf::RenderWindow & window) : void
+-DrawGrid(sf::RenderWindow & window) : void
+-DrawNumbers(sf::RenderWindow & window) : void
++GetCenter() const : sf::Vector2f
++GetScale() const : double
++GetXOffset() const : double
++GetYOffset() const : double
++Move(double x_delta, double y_delta) : void
+__
+-center : sf::Vector2f
+-grid_step : double
+-height : double
+-scale : double
+-width : double
+-x_axis : sf::Vertex[2]
+-x_offset : double
+-y_axis : sf::Vertex[2]
+-y_offset : double
 }
 class "GraphView" as C_0014771559603893296745
 class C_0014771559603893296745 {
 +GraphView() = default : void
-+GraphView(const std::vector<double> & x_coords, const std::vector<double> & y_coords, sf::Vector2f center, sf::Color color = = sf::Color::Blue, double scale = 1) : void
++GraphView(const std::vector<double> & x_coords, const std::vector<double> & y_coords, double x_offset = DEFAULT_X_OFFSET, double y_offset = DEFAULT_Y_OFFSET, double scale = DEFAULT_SCALE, sf::Color color = = DEFAULT_COLOR) : void
 ..
 +Draw(sf::RenderWindow & window) : void
++IsDiscontinuous(double y_1, double y_2) : bool
 __
--center : sf::Vector2f
 -color : sf::Color
 -scale : double
 -x_coords : std::vector<double>
+-x_offset : double
 -y_coords : std::vector<double>
+-y_offset : double
+}
+class "InputField" as C_0010059840003532263374
+class C_0010059840003532263374 {
++InputField(double x, double y, double width, double height, std::string_view text = "") : void
+..
++Draw(sf::RenderWindow & window) : void
++GetText() const : std::string
++HandleEvent(sf::Event event) : void
+-SetFocused(bool state) : void
+__
+-box : sf::RectangleShape
+-font : sf::Font
+-input_text : std::string
+-is_focused : bool
+-shown_text : sf::Text
 }
 class "BridgeController" as C_0016626464198588782218
 class C_0016626464198588782218 {
 +BridgeController(std::unique_ptr<InputField> input_field, std::unique_ptr<GraphImplementation> graph, std::unique_ptr<Canvas> canvas) : void
 ..
+-AdjustScale(const sf::Event & event) : void
+-DragMouse(const sf::Event & event) : void
 +Draw(sf::RenderWindow & window) : void
 +HandleEvent(const sf::Event & event) : void
+-MoveWithKeyboard(const sf::Event & event) : void
 -ProcessInput() : void
+-StartDragging(const sf::Event & event) : void
+-StopDragging(const sf::Event & event) : void
 +UpdateGraph() : void
 __
 -canvas : std::unique_ptr<Canvas>
 -graph : std::unique_ptr<GraphImplementation>
 -graph_view : std::unique_ptr<GraphView>
 -input_field : std::unique_ptr<InputField>
+-is_dragging : bool
+-last_mouse_pos : sf::Vector2i
 }
 C_0014658766721805681730 ..> C_0011145532357001778110
 C_0006172602671236523104 ..> C_0010059840003532263374
 C_0017517283236001165451 ..> C_0007984576225387246099
 C_0015342941539595836045 ..> C_0014971548349524840202
 C_0000966479641069824467 ..> C_0014771559603893296745
-C_0014971548349524840202 o-- C_0011369533705994597869 : -center
-C_0010059840003532263374 ..> C_0005583959530034250771
-C_0010059840003532263374 o-- C_0015070288861779828488 : -input_text
 C_0015820084507609131393 ..> C_0015070288861779828488
 C_0000626201140025210898 ..> C_0015070288861779828488
 C_0014237075050008292200 o-- C_0015070288861779828488 : +value
@@ -354,9 +378,11 @@ C_0007984576225387246099 ..> C_0005583959530034250771
 C_0007984576225387246099 o-- C_0014658766721805681730 : -formula
 C_0007984576225387246099 o-- C_0004101108369970767411 : -x_coords
 C_0007984576225387246099 o-- C_0004101108369970767411 : -y_coords
+C_0014971548349524840202 o-- C_0011369533705994597869 : -center
 C_0014771559603893296745 o-- C_0004101108369970767411 : -x_coords
 C_0014771559603893296745 o-- C_0004101108369970767411 : -y_coords
-C_0014771559603893296745 o-- C_0011369533705994597869 : -center
+C_0010059840003532263374 ..> C_0005583959530034250771
+C_0010059840003532263374 o-- C_0015070288861779828488 : -input_text
 C_0016626464198588782218 ..> C_0010059840003532263374
 C_0016626464198588782218 ..> C_0007984576225387246099
 C_0016626464198588782218 ..> C_0014971548349524840202
@@ -364,7 +390,8 @@ C_0016626464198588782218 o-- C_0006172602671236523104 : -input_field
 C_0016626464198588782218 o-- C_0017517283236001165451 : -graph
 C_0016626464198588782218 o-- C_0015342941539595836045 : -canvas
 C_0016626464198588782218 o-- C_0000966479641069824467 : -graph_view
+C_0016626464198588782218 o-- C_0002600167325038268945 : -last_mouse_pos
 
 'Generated with clang-uml, version 0.5.5
-'LLVM version Homebrew clang version 19.1.2
+'LLVM version Homebrew clang version 19.1.4
 @enduml
