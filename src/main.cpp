@@ -7,7 +7,7 @@
 
 int main() {
   sf::RenderWindow window(sf::VideoMode(WINDOW_WIDTH, WINDOW_HEIGHT),
-                          WINDOW_TITLE);
+                          WINDOW_TITLE, sf::Style::Close);
 
   BridgeController controller(
       std::make_unique<InputField>(INPUT_FIELD_X, INPUT_FIELD_Y,
