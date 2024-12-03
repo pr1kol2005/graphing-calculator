@@ -33,7 +33,7 @@ void GraphImplementation::Move(double x_delta) {
   left_span += (x_delta / grid_step);
 }
 
-double GraphImplementation::GetScale() const { return grid_step; }
+double GraphImplementation::GetGridStep() const { return grid_step; }
 
 void GraphImplementation::UpdateFormula(std::string_view expression) {
   try {

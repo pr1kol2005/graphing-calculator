@@ -26,7 +26,7 @@ class GraphImplementation {
 
   void Move(double x_delta);
 
-  double GetScale() const;
+  double GetGridStep() const;
 
  private:
   std::unique_ptr<IExpression> formula;
