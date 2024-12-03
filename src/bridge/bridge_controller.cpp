@@ -126,7 +126,7 @@ void BridgeController::UpdateGraph() {
     graph->CalculatePoints();
     graph_view = std::make_unique<GraphView>(
         graph->GetXCoords(), graph->GetYCoords(), canvas->GetXOffset(),
-        canvas->GetYOffset(), graph->GetScale(), sf::Color::Red);
+        canvas->GetYOffset(), graph->GetGridStep(), sf::Color::Red);
   } catch (const std::exception& error) {
     std::cerr << "Error while updating graph: " << error.what() << std::endl;
   }
