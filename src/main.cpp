@@ -15,8 +15,10 @@ int main() {
                                    GRAPH_DEFAULT_FORMULA),
       std::make_unique<GraphImplementation>(
           GRAPH_DEFAULT_FORMULA, DEFAULT_LEFT_SPAN, DEFAULT_RIGHT_SPAN,
-          GRAPH_POINTS_NUMBER, DEFAULT_SCALE),
-      std::make_unique<Canvas>(WINDOW_WIDTH, WINDOW_HEIGHT));
+          GRAPH_POINTS_NUMBER, DEFAULT_GRID_STEP),
+      std::make_unique<Canvas>(WINDOW_WIDTH, WINDOW_HEIGHT),
+      std::make_unique<ResetButton>(RESET_BUTTON_X, RESET_BUTTON_Y,
+                                    RESET_BUTTON_WIDTH, RESET_BUTTON_HEIGHT));
 
   while (window.isOpen()) {
     sf::Event event;
