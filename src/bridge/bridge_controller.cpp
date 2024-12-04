@@ -2,10 +2,12 @@
 
 BridgeController::BridgeController(std::unique_ptr<InputField> input_field,
                                    std::unique_ptr<GraphImplementation> graph,
-                                   std::unique_ptr<Canvas> canvas)
+                                   std::unique_ptr<Canvas> canvas,
+                                   std::unique_ptr<ResetButton> reset_button)
     : input_field(std::move(input_field)),
       graph(std::move(graph)),
-      canvas(std::move(canvas)) {
+      canvas(std::move(canvas)),
+      reset_button(std::move(reset_button)) {
   UpdateGraph();
 }
 
@@ -16,6 +18,8 @@ void BridgeController::Draw(sf::RenderWindow& window) {
     input_field->Draw(window);
 
     graph_view->Draw(window);
+
+    reset_button->Draw(window);
   } catch (const std::exception& e) {
     std::cerr << "Error while drawing: " << e.what() << std::endl;
   }
@@ -49,25 +53,25 @@ void BridgeController::HandleEvent(const sf::Event& event) {
     DragMouse(event);
   }
 
-  // if (event.type == sf::Event::MouseButtonPressed) {
-  //   if (reset_button->IsMouseOver(sf::Mouse::getPosition(window))) {
-  //     reset_button->OnClick();
-  //     ResetEverything();
-  //   }
-  // }
+  if (event.type == sf::Event::MouseButtonPressed) {
+    if (reset_button->IsMouseOver(event.mouseButton.x, event.mouseButton.y)) {
+      reset_button->OnClick();
+      ResetEverything();
+    }
+  }
 
-  // if (event.type == sf::Event::MouseButtonReleased) {
-  //   resetButton.ResetState();
-  // }
+  if (event.type == sf::Event::MouseButtonReleased) {
+    reset_button->ResetState();
+  }
 
   // TODO : Reset button
 }
 
-// void BridgeController::ResetEverything() {
-//   graph->Reset();
-//   canvas->Reset();
-//   UpdateGraph();
-// }
+void BridgeController::ResetEverything() {
+  graph->Reset();
+  canvas->Reset();
+  UpdateGraph();
+}
 
 void BridgeController::StartDragging(const sf::Event& event) {
   if (event.mouseButton.button == sf::Mouse::Left) {
