@@ -40,9 +40,6 @@ class Canvas {
   double x_offset;
   double y_offset;
 
-  const double default_scale;
-  const double default_grid_step;
-
   void DrawAxes(sf::RenderWindow &window);
   void DrawGrid(sf::RenderWindow &window);
   void DrawNumbers(sf::RenderWindow &window);

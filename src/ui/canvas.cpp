@@ -3,11 +3,11 @@
 Canvas::Canvas(double width, double height)
     : width(width),
       height(height),
-      grid_step(GRID_SPACING),
-      center(width / 2, height / 2),
+      grid_step(DEFAULT_GRID_STEP),
+      center(WINDOW_CENTER_X, WINDOW_CENTER_Y),
       x_offset(0),
       y_offset(0),
-      scale(1) {
+      scale(DEFAULT_SCALE) {
   x_axis[0] = sf::Vertex(sf::Vector2f(0, height / 2), sf::Color::Black);
   x_axis[1] = sf::Vertex(sf::Vector2f(width, height / 2), sf::Color::Black);
 
@@ -39,12 +39,12 @@ void Canvas::DrawAxes(sf::RenderWindow &window) {
 void Canvas::DrawGrid(sf::RenderWindow &window) {
   sf::Color grid_color(200, 200, 200);
 
-  if (grid_step < GRID_SPACING / 2) {
-    grid_step = GRID_SPACING;
+  if (grid_step < DEFAULT_GRID_STEP / 2) {
+    grid_step = DEFAULT_GRID_STEP;
     scale *= 2;
   }
-  if (grid_step > GRID_SPACING * 2) {
-    grid_step = GRID_SPACING;
+  if (grid_step > DEFAULT_GRID_STEP * 2) {
+    grid_step = DEFAULT_GRID_STEP;
     scale /= 2;
   }
 
@@ -129,6 +129,12 @@ sf::Vector2f Canvas::GetCenter() const { return center; }
 double Canvas::GetScale() const { return grid_step; }
 
 void Canvas::AdjustScale(double factor) { grid_step /= factor; }
+
+void Canvas::Reset() {
+  grid_step = DEFAULT_GRID_STEP;
+  scale = DEFAULT_SCALE;
+  Move(-x_offset, -y_offset);
+}
 
 void Canvas::Move(double x_delta, double y_delta) {
   x_offset += x_delta;
