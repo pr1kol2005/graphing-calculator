@@ -1,11 +1,10 @@
 #pragma once
 
 #include <SFML/Graphics.hpp>
-
-#include <string>
 #include <cmath>
 #include <iostream>
 #include <sstream>
+#include <string>
 
 #include "constants.hpp"
 
@@ -42,5 +41,5 @@ class Canvas {
 
   void DrawAxes(sf::RenderWindow &window);
   void DrawGrid(sf::RenderWindow &window);
-  void DrawNumbers(sf::RenderWindow& window);
+  void DrawNumbers(sf::RenderWindow &window);
 };

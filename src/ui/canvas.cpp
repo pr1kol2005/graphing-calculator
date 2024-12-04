@@ -71,7 +71,7 @@ void Canvas::DrawGrid(sf::RenderWindow &window) {
   }
 }
 
-void Canvas::DrawNumbers(sf::RenderWindow& window) {
+void Canvas::DrawNumbers(sf::RenderWindow &window) {
   sf::Font font;
   if (!font.loadFromFile("fonts/arial.ttf")) {
     throw std::runtime_error("Не удалось загрузить шрифт");
@@ -79,7 +79,8 @@ void Canvas::DrawNumbers(sf::RenderWindow& window) {
 
   double coord_to_num_coefficient = scale / grid_step;
 
-  int precision = std::max(0, static_cast<int>(-std::log10(coord_to_num_coefficient)) + 1);
+  int precision =
+      std::max(0, static_cast<int>(-std::log10(coord_to_num_coefficient)) + 1);
   // std::cerr << "Precision: " << grid_step << ' ' << scale << std::endl;
   // std::cerr << "Precision: " << precision << std::endl;
 
@@ -105,7 +106,8 @@ void Canvas::DrawNumbers(sf::RenderWindow& window) {
     window.draw(text);
   }
 
-  for (double y = height / 2 - y_offset + grid_step; y < height; y += grid_step) {
+  for (double y = height / 2 - y_offset + grid_step; y < height;
+       y += grid_step) {
     double coord = -(y - height / 2 + y_offset) * coord_to_num_coefficient;
     sf::Text text(FormatNumber(coord), font, 14);
     text.setFillColor(sf::Color::Black);
@@ -121,7 +123,6 @@ void Canvas::DrawNumbers(sf::RenderWindow& window) {
     window.draw(text);
   }
 }
-
 
 sf::Vector2f Canvas::GetCenter() const { return center; }
 
