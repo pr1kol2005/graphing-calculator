@@ -7,7 +7,7 @@ class ResetButton : public Button {
  public:
   ResetButton(int x, int y, double width, double height);
 
-  bool IsMouseOver(const sf::Vector2i& mousePosition) const override;
+  bool IsMouseOver(int mouse_x, int mouse_y) const override;
 
   void Draw(sf::RenderWindow& window) override;
 

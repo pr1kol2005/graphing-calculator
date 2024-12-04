@@ -6,7 +6,7 @@ class Button {
  public:
   virtual ~Button() = default;
 
-  virtual bool IsMouseOver(const sf::Vector2i& mousePosition) const = 0;
+  virtual bool IsMouseOver(int mouse_x, int mouse_y) const = 0;
 
   virtual void Draw(sf::RenderWindow& window) = 0;
 

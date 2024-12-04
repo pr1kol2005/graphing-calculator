@@ -7,7 +7,7 @@
 class GraphImplementation {
  public:
   GraphImplementation(std::string_view expression, double left_span,
-                      double right_span, double points_number,
+                      double right_span, int points_number,
                       double grid_step);
 
   void UpdateFormula(std::string_view expression);
@@ -20,13 +20,15 @@ class GraphImplementation {
 
   void UpdateSpan(double left_span, double right_span);
 
-  void UpdateStep(double points_number);
+  void UpdateStep(int points_number);
 
   void AdjustSpan(double factor);
 
   void Move(double x_delta);
 
   double GetGridStep() const;
+
+  void Reset();
 
  private:
   std::unique_ptr<IExpression> formula;
@@ -36,4 +38,8 @@ class GraphImplementation {
   double right_span;
   double step;
   double grid_step;
+
+  const int default_points_number;
+  const double default_span;
+  const double default_grid_step;
 };

@@ -26,6 +26,8 @@ class Canvas {
 
   void Move(double x_delta, double y_delta);
 
+  void Reset();
+
  private:
   double width;
   double height;
@@ -35,9 +37,11 @@ class Canvas {
   sf::Vertex y_axis[2];
   double grid_step;
   double scale;
-
   double x_offset;
   double y_offset;
+
+  const double default_scale;
+  const double default_grid_step;
 
   void DrawAxes(sf::RenderWindow &window);
   void DrawGrid(sf::RenderWindow &window);
