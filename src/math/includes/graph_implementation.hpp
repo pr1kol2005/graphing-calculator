@@ -3,6 +3,7 @@
 #include <vector>
 
 #include "parser.hpp"
+#include "constants.hpp"
 
 class GraphImplementation {
  public:
@@ -38,8 +39,4 @@ class GraphImplementation {
   double right_span;
   double step;
   double grid_step;
-
-  const int default_points_number;
-  const double default_span;
-  const double default_grid_step;
 };

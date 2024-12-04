@@ -4,7 +4,7 @@
 
 GraphImplementation::GraphImplementation(std::string_view expression,
                                          double left_span, double right_span,
-                                         double points_number, double grid_step)
+                                         int points_number, double grid_step)
     : grid_step(grid_step) {
   UpdateSpan(left_span, right_span);
   UpdateStep(points_number);
@@ -17,7 +17,7 @@ void GraphImplementation::UpdateSpan(double new_left_span,
   right_span = new_right_span;
 }
 
-void GraphImplementation::UpdateStep(double points_number) {
+void GraphImplementation::UpdateStep(int points_number) {
   step = (right_span + left_span) / points_number;
 }
 
@@ -26,6 +26,12 @@ void GraphImplementation::AdjustSpan(double factor) {
   left_span *= factor;
   right_span *= factor;
   grid_step /= factor;
+}
+
+void GraphImplementation::Reset() {
+  grid_step = DEFAULT_GRID_STEP;
+  UpdateSpan(DEFAULT_LEFT_SPAN, DEFAULT_RIGHT_SPAN);
+  UpdateStep(GRAPH_POINTS_NUMBER);
 }
 
 void GraphImplementation::Move(double x_delta) {
