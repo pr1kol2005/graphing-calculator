@@ -10,9 +10,8 @@ ResetButton::ResetButton(int x, int y, double width, double height)
   shape.setOutlineColor(sf::Color::Black);
 }
 
-bool ResetButton::IsMouseOver(const sf::Vector2i& mousePosition) const {
-  return shape.getGlobalBounds().contains(
-      static_cast<sf::Vector2f>(mousePosition));
+bool ResetButton::IsMouseOver(int mouse_x, int mouse_y) const {
+  return shape.getGlobalBounds().contains(mouse_x, mouse_y);
 }
 
 void ResetButton::Draw(sf::RenderWindow& window) { window.draw(shape); }
