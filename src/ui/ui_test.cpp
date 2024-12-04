@@ -21,7 +21,7 @@ int main() {
     yValues.push_back(std::sin(1 / x));
   }
 
-  GraphView graph(xValues, yValues, 0, 0, GRID_SPACING, sf::Color::Red);
+  GraphView graph(xValues, yValues, 0, 0, DEFAULT_GRID_STEP, sf::Color::Red);
 
   while (window.isOpen()) {
     sf::Event event;
