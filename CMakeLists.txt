@@ -16,13 +16,20 @@ FetchContent_Declare(SFML
   SYSTEM)
 FetchContent_MakeAvailable(SFML)
 
-add_executable(graph_calc src/main.cpp)
-target_link_libraries(graph_calc math_lib ui_lib bridge_lib)
-target_include_directories(graph_calc PRIVATE src/math src/ui src/bridge)
-
 add_subdirectory(src/math math)
 add_subdirectory(src/ui ui)
 add_subdirectory(src/bridge bridge)
+
+add_executable(graph_calc src/main.cpp)
+
+target_link_libraries(graph_calc math_lib ui_lib bridge_lib)
+
+target_include_directories(graph_calc PRIVATE
+  ${CMAKE_SOURCE_DIR}/src/math/includes
+  ${CMAKE_SOURCE_DIR}/src/ui/includes
+  ${CMAKE_SOURCE_DIR}/src/bridge/includes
+  ${CMAKE_SOURCE_DIR}/src/includes
+)
 
 if(WIN32)
   add_custom_command(
