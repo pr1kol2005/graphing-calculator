@@ -5,6 +5,7 @@
 #include <vector>
 
 #include "constants.hpp"
+#include "sfml_constants.hpp"
 
 class GraphView {
  public:
@@ -13,7 +14,8 @@ class GraphView {
   GraphView(const std::vector<double> &x_coords,
             const std::vector<double> &y_coords,
             double x_offset = DEFAULT_X_OFFSET,
-            double y_offset = DEFAULT_Y_OFFSET, double scale = DEFAULT_SCALE,
+            double y_offset = DEFAULT_Y_OFFSET,
+            double grid_step = DEFAULT_GRID_STEP,
             sf::Color color = DEFAULT_COLOR);
 
   bool IsDiscontinuous(double y_1, double y_2);
@@ -25,6 +27,6 @@ class GraphView {
   std::vector<double> y_coords;
   double x_offset;
   double y_offset;
-  double scale;
+  double grid_step;
   sf::Color color;
 };

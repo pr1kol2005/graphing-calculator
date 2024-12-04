@@ -2,12 +2,12 @@
 
 GraphView::GraphView(const std::vector<double> &x_coords,
                      const std::vector<double> &y_coords, double x_offset,
-                     double y_offset, double scale, sf::Color color)
+                     double y_offset, double grid_step, sf::Color color)
     : x_coords(x_coords),
       y_coords(y_coords),
       x_offset(x_offset),
       y_offset(y_offset),
-      scale(scale),
+      grid_step(grid_step),
       color(color) {}
 
 bool GraphView::IsDiscontinuous(double y_1, double y_2) {
@@ -23,8 +23,8 @@ void GraphView::Draw(sf::RenderWindow &window) {
   std::vector<size_t> break_indexes = {0};
 
   for (size_t i = 0; i < x_coords.size(); ++i) {
-    double x_canvas_coord = WINDOW_CENTER_X + (x_coords[i] * scale) + x_offset;
-    double y_canvas_coord = WINDOW_CENTER_Y + (y_coords[i] * scale) + y_offset;
+    double x_canvas_coord = WINDOW_CENTER_X + (x_coords[i] * grid_step) + x_offset;
+    double y_canvas_coord = WINDOW_CENTER_Y + (y_coords[i] * grid_step) + y_offset;
 
     y_canvas_coord = WINDOW_HEIGHT - y_canvas_coord;
 
