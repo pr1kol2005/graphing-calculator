@@ -49,8 +49,25 @@ void BridgeController::HandleEvent(const sf::Event& event) {
     DragMouse(event);
   }
 
+  // if (event.type == sf::Event::MouseButtonPressed) {
+  //   if (reset_button->IsMouseOver(sf::Mouse::getPosition(window))) {
+  //     reset_button->OnClick();
+  //     ResetEverything();
+  //   }
+  // }
+
+  // if (event.type == sf::Event::MouseButtonReleased) {
+  //   resetButton.ResetState();
+  // }
+
   // TODO : Reset button
 }
+
+// void BridgeController::ResetEverything() {
+//   graph->Reset();
+//   canvas->Reset();
+//   UpdateGraph();
+// }
 
 void BridgeController::StartDragging(const sf::Event& event) {
   if (event.mouseButton.button == sf::Mouse::Left) {
