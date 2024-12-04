@@ -2,7 +2,7 @@
 
 #include <iostream>
 
-InputField::InputField(double x, double y, double width, double height,
+InputField::InputField(int x, int y, double width, double height,
                        std::string_view text)
     : input_text(text), is_focused(false) {
   box.setPosition(x, y);
