@@ -1,13 +1,16 @@
 #include "canvas.hpp"
 
-Canvas::Canvas(double width, double height)
+#include <iostream>
+
+Canvas::Canvas(int width, int height)
     : width(width),
       height(height),
       grid_step(DEFAULT_GRID_STEP),
       center(WINDOW_CENTER_X, WINDOW_CENTER_Y),
       x_offset(0),
       y_offset(0),
-      scale(DEFAULT_SCALE) {
+      scale(DEFAULT_SCALE),
+      zoom_level(0) {
   x_axis[0] = sf::Vertex(sf::Vector2f(0, height / 2), sf::Color::Black);
   x_axis[1] = sf::Vertex(sf::Vector2f(width, height / 2), sf::Color::Black);
 
@@ -41,11 +44,13 @@ void Canvas::DrawGrid(sf::RenderWindow &window) {
 
   if (grid_step < DEFAULT_GRID_STEP / 2) {
     grid_step = DEFAULT_GRID_STEP;
-    scale *= 2;
+    scale = DEFAULT_SCALE;
+    zoom_level += 1;
   }
   if (grid_step > DEFAULT_GRID_STEP * 2) {
     grid_step = DEFAULT_GRID_STEP;
-    scale /= 2;
+    scale = DEFAULT_SCALE;
+    zoom_level -= 1;
   }
 
   for (double x = width / 2 + x_offset; x < width; x += grid_step) {
@@ -77,7 +82,7 @@ void Canvas::DrawNumbers(sf::RenderWindow &window) {
     throw std::runtime_error("Не удалось загрузить шрифт");
   }
 
-  double coord_to_num_coefficient = scale / grid_step;
+  double coord_to_num_coefficient = std::pow(2, zoom_level) / grid_step;
 
   int precision =
       std::max(0, static_cast<int>(-std::log10(coord_to_num_coefficient)) + 1);
@@ -124,24 +129,28 @@ void Canvas::DrawNumbers(sf::RenderWindow &window) {
   }
 }
 
-sf::Vector2f Canvas::GetCenter() const { return center; }
+sf::Vector2i Canvas::GetCenter() const { return center; }
 
-double Canvas::GetScale() const { return grid_step; }
+int Canvas::GetGridStep() const { return grid_step; }
 
-void Canvas::AdjustScale(double factor) { grid_step /= factor; }
+void Canvas::AdjustScale(double factor) {
+  scale *= factor;
+  grid_step = DEFAULT_GRID_STEP / scale;
+}
 
 void Canvas::Reset() {
   grid_step = DEFAULT_GRID_STEP;
   scale = DEFAULT_SCALE;
+  zoom_level = 0;
   Move(-x_offset, -y_offset);
 }
 
-void Canvas::Move(double x_delta, double y_delta) {
+void Canvas::Move(int x_delta, int y_delta) {
   x_offset += x_delta;
   y_offset += y_delta;
-  center += sf::Vector2f(x_delta, y_delta);
+  center += sf::Vector2i(x_delta, y_delta);
 }
 
-double Canvas::GetXOffset() const { return x_offset; }
+int Canvas::GetXOffset() const { return x_offset; }
 
-double Canvas::GetYOffset() const { return y_offset; }
+int Canvas::GetYOffset() const { return y_offset; }
