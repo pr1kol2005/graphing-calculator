@@ -9,7 +9,7 @@ class GraphImplementation {
  public:
   GraphImplementation(std::string_view expression, double left_span,
                       double right_span, int points_number,
-                      double grid_step);
+                      int grid_step);
 
   void UpdateFormula(std::string_view expression);
 
@@ -38,5 +38,6 @@ class GraphImplementation {
   double left_span;
   double right_span;
   double step;
-  double grid_step;
+  double scale;
+  int grid_step;
 };
