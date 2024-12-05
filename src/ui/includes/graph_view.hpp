@@ -13,9 +13,9 @@ class GraphView {
 
   GraphView(const std::vector<double> &x_coords,
             const std::vector<double> &y_coords,
-            double x_offset = DEFAULT_X_OFFSET,
-            double y_offset = DEFAULT_Y_OFFSET,
-            double grid_step = DEFAULT_GRID_STEP,
+            int x_offset = DEFAULT_X_OFFSET,
+            int y_offset = DEFAULT_Y_OFFSET,
+            int grid_step = DEFAULT_GRID_STEP,
             sf::Color color = DEFAULT_COLOR);
 
   bool IsDiscontinuous(double y_1, double y_2);
@@ -25,8 +25,8 @@ class GraphView {
  private:
   std::vector<double> x_coords;
   std::vector<double> y_coords;
-  double x_offset;
-  double y_offset;
-  double grid_step;
+  int x_offset;
+  int y_offset;
+  int grid_step;
   sf::Color color;
 };

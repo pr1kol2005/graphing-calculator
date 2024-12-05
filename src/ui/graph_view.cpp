@@ -1,8 +1,8 @@
 #include "graph_view.hpp"
 
 GraphView::GraphView(const std::vector<double> &x_coords,
-                     const std::vector<double> &y_coords, double x_offset,
-                     double y_offset, double grid_step, sf::Color color)
+                     const std::vector<double> &y_coords, int x_offset,
+                     int y_offset, int grid_step, sf::Color color)
     : x_coords(x_coords),
       y_coords(y_coords),
       x_offset(x_offset),

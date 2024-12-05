@@ -10,35 +10,37 @@
 
 class Canvas {
  public:
-  Canvas(double width, double height);
+  Canvas(int width, int height);
 
   void Draw(sf::RenderWindow &window);
 
-  sf::Vector2f GetCenter() const;
+  sf::Vector2i GetCenter() const;
 
-  double GetScale() const;
+  int GetGridStep() const;
 
-  double GetXOffset() const;
+  int GetXOffset() const;
 
-  double GetYOffset() const;
+  int GetYOffset() const;
 
   void AdjustScale(double factor);
 
-  void Move(double x_delta, double y_delta);
+  void Move(int x_delta, int y_delta);
 
   void Reset();
 
  private:
-  double width;
-  double height;
-  sf::Vector2f center;
+  int width;
+  int height;
+  sf::Vector2i center;
+
+  double scale;
+  int zoom_level;
 
   sf::Vertex x_axis[2];
   sf::Vertex y_axis[2];
-  double grid_step;
-  double scale;
-  double x_offset;
-  double y_offset;
+  int grid_step;
+  int x_offset;
+  int y_offset;
 
   void DrawAxes(sf::RenderWindow &window);
   void DrawGrid(sf::RenderWindow &window);

@@ -92,8 +92,8 @@ void BridgeController::DragMouse(const sf::Event& event) {
     sf::Vector2i delta = current_mouse_pos - last_mouse_pos;
     last_mouse_pos = current_mouse_pos;
 
-    double x_delta = delta.x;
-    double y_delta = delta.y;
+    int x_delta = delta.x;
+    int y_delta = delta.y;
     graph->Move(x_delta);
     canvas->Move(x_delta, -y_delta);
     UpdateGraph();
