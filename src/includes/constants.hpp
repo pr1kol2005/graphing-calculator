@@ -13,8 +13,8 @@ const double GRAPH_POINTS_NUMBER = 1000;
 const std::string GRAPH_DEFAULT_FORMULA = "";
 
 const int DEFAULT_SCALE = 1;
-const double DEFAULT_X_OFFSET = 0;
-const double DEFAULT_Y_OFFSET = 0;
+const int DEFAULT_X_OFFSET = 0;
+const int DEFAULT_Y_OFFSET = 0;
 const double DEFAULT_LEFT_SPAN = 5;
 const double DEFAULT_RIGHT_SPAN = 5;
 
