@@ -1,0 +1,10 @@
+compilation_database_dir: build
+
+output_directory: images
+
+diagrams:
+  project_diagram:
+    type: class
+    glob:
+      - src/**.cpp
+      - src/**.hpp
