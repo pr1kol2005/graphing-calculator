@@ -9,7 +9,7 @@ const int WINDOW_CENTER_Y = WINDOW_HEIGHT / 2;
 
 const int DEFAULT_GRID_STEP = WINDOW_WIDTH / 10;
 
-const double GRAPH_POINTS_NUMBER = 1000;
+const int GRAPH_POINTS_NUMBER = 1000;
 const std::string GRAPH_DEFAULT_FORMULA = "";
 
 const int DEFAULT_SCALE = 1;

@@ -63,8 +63,6 @@ void BridgeController::HandleEvent(const sf::Event& event) {
   if (event.type == sf::Event::MouseButtonReleased) {
     reset_button->ResetState();
   }
-
-  // TODO : Reset button
 }
 
 void BridgeController::ResetEverything() {
