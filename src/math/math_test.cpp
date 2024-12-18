@@ -9,6 +9,6 @@ int main() {
   double x = 0;
   std::cout << "Enter x: ";
   std::cin >> x;
-  auto expression = GetExpressionFromPolishNotation(input);
+  auto expression = GetExpressionFromUsualNotation(input);
   std::cout << "Result: " << expression->Calculate(x) << std::endl;
 }
