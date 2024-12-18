@@ -69,7 +69,7 @@ std::unique_ptr<IExpression> HandleToken(
     if (std::holds_alternative<LnToken>(token)) {
       return std::make_unique<LogBaseE>(unary_factory(tokens, pos));
     }
-    if (std::holds_alternative<LgToken>(token)) {  
+    if (std::holds_alternative<LgToken>(token)) {
       return std::make_unique<LogBaseTen>(unary_factory(tokens, pos));
     }
     if (std::holds_alternative<Log2Token>(token)) {
@@ -173,18 +173,16 @@ std::unique_ptr<IExpression> ParsePrimary(const std::vector<Token>& tokens,
     throw WrongExpressionError("Unexpected end of expression");
   }
 
-  auto variable_factory = [&](const std::vector<Token>&,
-                                     size_t&) -> Variable {
+  auto variable_factory = [&](const std::vector<Token>&, size_t&) -> Variable {
     return Variable{};
   };
 
-  auto number_factory = [&](const std::vector<Token>& t,
-                                   size_t& p) -> double {
+  auto number_factory = [&](const std::vector<Token>& t, size_t& p) -> double {
     return std::get<NumberToken>(t[p - 1]).value;
   };
 
   auto unary_factory = [&](const std::vector<Token>& t,
-                                  size_t& p) -> std::unique_ptr<IExpression> {
+                           size_t& p) -> std::unique_ptr<IExpression> {
     return ParsePrimary(t, p);
   };
 
@@ -224,11 +222,15 @@ std::unique_ptr<IExpression> ParseBinary(const std::vector<Token>& tokens,
 
     auto right = ParseBinary(tokens, pos, priority + 1);
 
-    auto binary_factory_left = [&](const std::vector<Token>&, size_t&)
-        -> std::unique_ptr<IExpression> { return std::move(left); };
+    auto binary_factory_left = [&](const std::vector<Token>&,
+                                   size_t&) -> std::unique_ptr<IExpression> {
+      return std::move(left);
+    };
 
-    auto binary_factory_right = [&](const std::vector<Token>&, size_t&)
-        -> std::unique_ptr<IExpression> { return std::move(right); };
+    auto binary_factory_right = [&](const std::vector<Token>&,
+                                    size_t&) -> std::unique_ptr<IExpression> {
+      return std::move(right);
+    };
 
     left = HandleToken(token, pos, tokens, nullptr, nullptr, nullptr,
                        binary_factory_left, binary_factory_right);

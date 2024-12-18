@@ -108,8 +108,7 @@ class Asin : public IUnaryOperation {
   using IUnaryOperation::IUnaryOperation;
 
  protected:
-  double Operation(double operand) const override { return
-  std::asin(operand); }
+  double Operation(double operand) const override { return std::asin(operand); }
 };
 
 class Acos : public IUnaryOperation {
@@ -117,8 +116,7 @@ class Acos : public IUnaryOperation {
   using IUnaryOperation::IUnaryOperation;
 
  protected:
-  double Operation(double operand) const override { return
-  std::acos(operand); }
+  double Operation(double operand) const override { return std::acos(operand); }
 };
 
 class Atan : public IUnaryOperation {
@@ -126,8 +124,7 @@ class Atan : public IUnaryOperation {
   using IUnaryOperation::IUnaryOperation;
 
  protected:
-  double Operation(double operand) const override { return
-  std::atan(operand); }
+  double Operation(double operand) const override { return std::atan(operand); }
 };
 
 class Sinh : public IUnaryOperation {
@@ -135,8 +132,7 @@ class Sinh : public IUnaryOperation {
   using IUnaryOperation::IUnaryOperation;
 
  protected:
-  double Operation(double operand) const override { return
-  std::sinh(operand); }
+  double Operation(double operand) const override { return std::sinh(operand); }
 };
 
 class Cosh : public IUnaryOperation {
@@ -144,8 +140,7 @@ class Cosh : public IUnaryOperation {
   using IUnaryOperation::IUnaryOperation;
 
  protected:
-  double Operation(double operand) const override { return
-  std::cosh(operand); }
+  double Operation(double operand) const override { return std::cosh(operand); }
 };
 
 class Tanh : public IUnaryOperation {
@@ -153,8 +148,7 @@ class Tanh : public IUnaryOperation {
   using IUnaryOperation::IUnaryOperation;
 
  protected:
-  double Operation(double operand) const override { return
-  std::tanh(operand); }
+  double Operation(double operand) const override { return std::tanh(operand); }
 };
 
 class Asinh : public IUnaryOperation {
@@ -192,8 +186,7 @@ class LogBaseE : public IUnaryOperation {
   using IUnaryOperation::IUnaryOperation;
 
  protected:
-  double Operation(double operand) const override { return std::log(operand);
-  }
+  double Operation(double operand) const override { return std::log(operand); }
 };
 
 class LogBaseTwo : public IUnaryOperation {
@@ -201,8 +194,7 @@ class LogBaseTwo : public IUnaryOperation {
   using IUnaryOperation::IUnaryOperation;
 
  protected:
-  double Operation(double operand) const override { return
-  std::log2(operand); }
+  double Operation(double operand) const override { return std::log2(operand); }
 };
 
 class LogBaseTen : public IUnaryOperation {

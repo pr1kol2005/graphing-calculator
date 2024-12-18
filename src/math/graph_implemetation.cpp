@@ -43,7 +43,8 @@ double GraphImplementation::GetGridStep() const { return grid_step; }
 
 void GraphImplementation::UpdateFormula(std::string_view expression) {
   try {
-    formula = GetExpressionFromPolishNotation(expression);
+    // formula = GetExpressionFromPolishNotation(expression);
+    formula = GetExpressionFromUsualNotation(expression);
   } catch (const std::exception &error) {
     std::cerr << "Error while updating formula: " << error.what() << std::endl;
     formula = nullptr;
