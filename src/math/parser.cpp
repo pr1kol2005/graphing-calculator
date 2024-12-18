@@ -148,18 +148,105 @@ std::unique_ptr<IExpression> GetExpressionFromPolishNotation(
   return expression;
 }
 
-void OptimizeExpression(std::unique_ptr<IExpression> &expression) {
-  // TODO: implement optimization
+int GetPriority(const Token& token) {
+  if (std::holds_alternative<PlusToken>(token)) {
+    return 1;
+  }
+  if (std::holds_alternative<MinusToken>(token)) {
+    return 1;
+  }
+  if (std::holds_alternative<MultiplyToken>(token)) {
+    return 2;
+  }
+  if (std::holds_alternative<DivideToken>(token)) {
+    return 2;
+  }
+  if (std::holds_alternative<PowerToken>(token)) {
+    return 3;
+  }
+  return 0;
+}
+
+std::unique_ptr<IExpression> ParsePrimary(const std::vector<Token>& tokens,
+                                          size_t& pos) {
+  if (pos >= tokens.size()) {
+    throw WrongExpressionError("Unexpected end of expression");
+  }
+
+  auto variable_factory = [&](const std::vector<Token>&,
+                                     size_t&) -> Variable {
+    return Variable{};
+  };
+
+  auto number_factory = [&](const std::vector<Token>& t,
+                                   size_t& p) -> double {
+    return std::get<NumberToken>(t[p - 1]).value;
+  };
+
+  auto unary_factory = [&](const std::vector<Token>& t,
+                                  size_t& p) -> std::unique_ptr<IExpression> {
+    return ParsePrimary(t, p);
+  };
+
+  const Token& token = tokens[pos];
+
+  if (std::holds_alternative<OpeningBracketToken>(token)) {
+    ++pos;
+    auto expr = ParseUsualNotation(tokens, pos);
+    if (pos >= tokens.size() ||
+        !std::holds_alternative<ClosingBracketToken>(tokens[pos])) {
+      throw WrongExpressionError("Mismatched brackets");
+    }
+    ++pos;
+    return expr;
+  } else {
+    ++pos;
+  }
+
+  return HandleToken(token, pos, tokens, variable_factory, number_factory,
+                     unary_factory, nullptr, nullptr);
+}
+
+std::unique_ptr<IExpression> ParseBinary(const std::vector<Token>& tokens,
+                                         size_t& pos, int min_priotity) {
+  auto left = ParsePrimary(tokens, pos);
+
+  while (pos < tokens.size()) {
+    const Token& token = tokens[pos];
+
+    int priority = GetPriority(token);
+
+    if (priority < min_priotity || priority == 0) {
+      break;
+    }
+
+    ++pos;
+
+    auto right = ParseBinary(tokens, pos, priority + 1);
+
+    auto binary_factory_left = [&](const std::vector<Token>&, size_t&)
+        -> std::unique_ptr<IExpression> { return std::move(left); };
+
+    auto binary_factory_right = [&](const std::vector<Token>&, size_t&)
+        -> std::unique_ptr<IExpression> { return std::move(right); };
+
+    left = HandleToken(token, pos, tokens, nullptr, nullptr, nullptr,
+                       binary_factory_left, binary_factory_right);
+  }
+
+  return left;
+}
+
+std::unique_ptr<IExpression> ParseUsualNotation(
+    const std::vector<Token>& tokens, size_t& pos) {
+  return ParseBinary(tokens, pos, 0);
 }
 
 std::unique_ptr<IExpression> GetExpressionFromUsualNotation(
     std::string_view input) {
-  // TODO: implement usual notation
-  return 0;
-}
+  std::vector<Token> tokens = Tokenize(input);
+  size_t pos = 0;
+  auto expression = ParseUsualNotation(tokens, pos);
 
-std::unique_ptr<IExpression> ParseUsualNotation(
-    const std::vector<Token> &tokens, size_t &pos) {
-  // TODO: implement usual notation
-  return nullptr;
+  return expression;
 }
