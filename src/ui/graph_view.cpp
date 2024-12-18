@@ -23,8 +23,10 @@ void GraphView::Draw(sf::RenderWindow &window) {
   std::vector<size_t> break_indexes = {0};
 
   for (size_t i = 0; i < x_coords.size(); ++i) {
-    double x_canvas_coord = WINDOW_CENTER_X + (x_coords[i] * grid_step) + x_offset;
-    double y_canvas_coord = WINDOW_CENTER_Y + (y_coords[i] * grid_step) + y_offset;
+    double x_canvas_coord =
+        WINDOW_CENTER_X + (x_coords[i] * grid_step) + x_offset;
+    double y_canvas_coord =
+        WINDOW_CENTER_Y + (y_coords[i] * grid_step) + y_offset;
 
     y_canvas_coord = WINDOW_HEIGHT - y_canvas_coord;
 

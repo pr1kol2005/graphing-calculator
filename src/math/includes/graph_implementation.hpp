@@ -2,14 +2,13 @@
 
 #include <vector>
 
-#include "parser.hpp"
 #include "constants.hpp"
+#include "parser.hpp"
 
 class GraphImplementation {
  public:
   GraphImplementation(std::string_view expression, double left_span,
-                      double right_span, int points_number,
-                      double grid_step);
+                      double right_span, int points_number, double grid_step);
 
   void UpdateFormula(std::string_view expression);
 

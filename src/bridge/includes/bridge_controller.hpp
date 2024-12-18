@@ -4,13 +4,13 @@
 #include <iostream>
 #include <memory>
 
-#include "graph_implementation.hpp"
-#include "parser.hpp"
 #include "canvas.hpp"
+#include "constants.hpp"
+#include "graph_implementation.hpp"
 #include "graph_view.hpp"
 #include "input_field.hpp"
+#include "parser.hpp"
 #include "reset_button.hpp"
-#include "constants.hpp"
 
 class BridgeController {
  public:

@@ -1,5 +1,6 @@
-#include "button.hpp"
 #include "reset_button.hpp"
+
+#include "button.hpp"
 
 ResetButton::ResetButton(int x, int y, double width, double height)
     : is_pressed(false) {

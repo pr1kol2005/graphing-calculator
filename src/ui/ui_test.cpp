@@ -2,9 +2,9 @@
 #include <cmath>
 
 #include "canvas.hpp"
+#include "constants.hpp"
 #include "graph_view.hpp"
 #include "input_field.hpp"
-#include "constants.hpp"
 
 int main() {
   sf::RenderWindow window(sf::VideoMode(WINDOW_WIDTH, WINDOW_HEIGHT),
