@@ -19,3 +19,5 @@ std::unique_ptr<IExpression> ParseUsualNotation(
     const std::vector<Token> &tokens, size_t &pos);
 
 int GetPriority(const Token &token);
+
+// TODO : add tree optimization

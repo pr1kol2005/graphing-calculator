@@ -120,6 +120,7 @@ void BridgeController::MoveWithKeyboard(const sf::Event& event) {
 }
 
 void BridgeController::AdjustScale(const sf::Event& event) {
+  // TODO : fix upscaling error
   double factor = 1;
   double delta = event.mouseWheelScroll.delta / 120.0;
   factor = std::max(0.1, std::min(10.0, factor + delta));
