@@ -1,5 +1,4 @@
 #include <SFML/Graphics.hpp>
-
 #include <cmath>
 
 #include "canvas.hpp"
@@ -9,7 +8,7 @@
 
 int main() {
   sf::RenderWindow window(sf::VideoMode(WINDOW_WIDTH, WINDOW_HEIGHT),
-                          WINDOW_TITLE);
+                          WINDOW_TITLE, sf::Style::Close);
 
   Canvas canvas(WINDOW_WIDTH, WINDOW_HEIGHT);
   InputField input_field(10, 10, 200, 50);
@@ -22,8 +21,7 @@ int main() {
     yValues.push_back(std::sin(1 / x));
   }
 
-  GraphView graph(xValues, yValues, canvas.GetCenter(), sf::Color::Red,
-                  GRID_SPACING);
+  GraphView graph(xValues, yValues, 0, 0, DEFAULT_GRID_STEP, sf::Color::Red);
 
   while (window.isOpen()) {
     sf::Event event;

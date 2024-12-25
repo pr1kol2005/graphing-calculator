@@ -1,17 +1,24 @@
 #include <SFML/Graphics.hpp>
 
+#include "bridge_controller.hpp"
 #include "canvas.hpp"
 #include "constants.hpp"
 #include "input_field.hpp"
-#include "bridge_controller.hpp"
 
 int main() {
   sf::RenderWindow window(sf::VideoMode(WINDOW_WIDTH, WINDOW_HEIGHT),
-                          WINDOW_TITLE);
+                          WINDOW_TITLE, sf::Style::Close);
 
-  BridgeController controller(std::make_unique<InputField>(INPUT_FIELD_X, INPUT_FIELD_Y, INPUT_FIELD_WIDTH, INPUT_FIELD_HEIGHT, GRAPH_DEFAULT_FORMULA),
-                             std::make_unique<GraphImplementation>(GRAPH_DEFAULT_FORMULA, WINDOW_WIDTH, GRAPH_DOTS_STEP),
-                             std::make_unique<Canvas>(WINDOW_WIDTH, WINDOW_HEIGHT));
+  BridgeController controller(
+      std::make_unique<InputField>(INPUT_FIELD_X, INPUT_FIELD_Y,
+                                   INPUT_FIELD_WIDTH, INPUT_FIELD_HEIGHT,
+                                   GRAPH_DEFAULT_FORMULA),
+      std::make_unique<GraphImplementation>(
+          GRAPH_DEFAULT_FORMULA, DEFAULT_LEFT_SPAN, DEFAULT_RIGHT_SPAN,
+          GRAPH_POINTS_NUMBER, DEFAULT_GRID_STEP),
+      std::make_unique<Canvas>(WINDOW_WIDTH, WINDOW_HEIGHT),
+      std::make_unique<ResetButton>(RESET_BUTTON_X, RESET_BUTTON_Y,
+                                    RESET_BUTTON_WIDTH, RESET_BUTTON_HEIGHT));
 
   while (window.isOpen()) {
     sf::Event event;

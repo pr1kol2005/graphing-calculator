@@ -60,17 +60,8 @@ Token StrToToken(std::string_view token) {
   if (token == "/") {
     return DivideToken();
   }
-  if (token == "min") {
-    return MinToken();
-  }
-  if (token == "max") {
-    return MaxToken();
-  }
   if (token == "abs") {
     return AbsToken();
-  }
-  if (token == "%") {
-    return ResidualToken();
   }
   if (token == "sqrt") {
     return SqrtToken();
@@ -86,6 +77,42 @@ Token StrToToken(std::string_view token) {
   }
   if (token == "tan") {
     return TanToken();
+  }
+  if (token == "asin") {
+    return AsinToken();
+  }
+  if (token == "acos") {
+    return AcosToken();
+  }
+  if (token == "atan") {
+    return AtanToken();
+  }
+  if (token == "sinh") {
+    return SinhToken();
+  }
+  if (token == "cosh") {
+    return CoshToken();
+  }
+  if (token == "tanh") {
+    return TanhToken();
+  }
+  if (token == "asinh") {
+    return AsinhToken();
+  }
+  if (token == "acosh") {
+    return AcoshToken();
+  }
+  if (token == "atanh") {
+    return AtanhToken();
+  }
+  if (token == "ln") {
+    return LnToken();
+  }
+  if (token == "lg") {
+    return LgToken();
+  }
+  if (token == "log2") {
+    return Log2Token();
   }
   if (token == "(") {
     return OpeningBracketToken();
@@ -107,7 +134,7 @@ std::vector<Token> Tokenize(std::string_view str) {
   std::vector<Token> result;
   result.reserve(separated.size());
 
-  for (const auto& substr : separated) {
+  for (const auto &substr : separated) {
     result.emplace_back(StrToToken(substr));
   }
 

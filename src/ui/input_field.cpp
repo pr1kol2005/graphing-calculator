@@ -1,6 +1,9 @@
 #include "input_field.hpp"
 
-InputField::InputField(double x, double y, double width, double height, std::string_view text)
+#include <iostream>
+
+InputField::InputField(int x, int y, double width, double height,
+                       std::string_view text)
     : input_text(text), is_focused(false) {
   box.setPosition(x, y);
   box.setSize(sf::Vector2f(width, height));
@@ -19,7 +22,7 @@ InputField::InputField(double x, double y, double width, double height, std::str
   shown_text.setString(input_text);
 }
 
-void InputField::Draw(sf::RenderWindow& window) {
+void InputField::Draw(sf::RenderWindow &window) {
   window.draw(box);
   window.draw(shown_text);
 
@@ -43,7 +46,7 @@ void InputField::HandleEvent(sf::Event event) {
   if (is_focused && event.type == sf::Event::TextEntered) {
     if (event.text.unicode == '\b' && !input_text.empty()) {
       input_text.pop_back();
-    } else if (event.text.unicode < 128) {
+    } else if (event.text.unicode < 128 && event.text.unicode > 31) {
       input_text += static_cast<char>(event.text.unicode);
     }
     shown_text.setString(input_text);

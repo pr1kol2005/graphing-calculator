@@ -1,22 +1,51 @@
-#include "graph_implementation.hpp"
-
 #include <iostream>
 
+#include "graph_implementation.hpp"
+
 GraphImplementation::GraphImplementation(std::string_view expression,
-                                         double width_view, double step) {
-  UpdateScale(width_view, step);
+                                         double left_span, double right_span,
+                                         int points_number, double grid_step)
+    : grid_step(grid_step) {
+  UpdateSpan(left_span, right_span);
+  UpdateStep(points_number);
   UpdateFormula(expression);
 }
 
-void GraphImplementation::UpdateScale(double width_view, double step) {
-  this->width_view = width_view;
-  this->step = step;
+void GraphImplementation::UpdateSpan(double new_left_span,
+                                     double new_right_span) {
+  left_span = new_left_span;
+  right_span = new_right_span;
 }
+
+void GraphImplementation::UpdateStep(int points_number) {
+  step = (right_span + left_span) / points_number;
+}
+
+void GraphImplementation::AdjustSpan(double factor) {
+  step *= factor;
+  left_span *= factor;
+  right_span *= factor;
+  grid_step /= factor;
+}
+
+void GraphImplementation::Reset() {
+  grid_step = DEFAULT_GRID_STEP;
+  UpdateSpan(DEFAULT_LEFT_SPAN, DEFAULT_RIGHT_SPAN);
+  UpdateStep(GRAPH_POINTS_NUMBER);
+}
+
+void GraphImplementation::Move(double x_delta) {
+  right_span -= (x_delta / grid_step);
+  left_span += (x_delta / grid_step);
+}
+
+double GraphImplementation::GetGridStep() const { return grid_step; }
 
 void GraphImplementation::UpdateFormula(std::string_view expression) {
   try {
-    formula = GetExpressionFromPolishNotation(expression);
-  } catch (const std::exception& error) {
+    // formula = GetExpressionFromPolishNotation(expression);
+    formula = GetExpressionFromUsualNotation(expression);
+  } catch (const std::exception &error) {
     std::cerr << "Error while updating formula: " << error.what() << std::endl;
     formula = nullptr;
   }
@@ -25,9 +54,10 @@ void GraphImplementation::UpdateFormula(std::string_view expression) {
 void GraphImplementation::CalculatePoints() {
   x_coords.clear();
   y_coords.clear();
-  for (double x = -width_view; x <= width_view && formula; x += step) {
+  for (double x = -left_span; x <= right_span && formula; x += step) {
+    double y = formula->Calculate(x);
     x_coords.push_back(x);
-    y_coords.push_back(formula->Calculate(x));
+    y_coords.push_back(y);
   }
 }
 
